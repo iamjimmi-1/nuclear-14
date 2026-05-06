@@ -339,3 +339,18 @@
   - type: Tag
     tags:
     - SuperMutantWearable
+    
+    # Misfits Add - Follower Supermutant sprites.
+- type: entity
+  parent: ClothingHandsBase
+  id: SupermutantFollowerGloves
+  name: Supermutant Sterile Gloves
+  description: Gigantic gloves intended for supermutants to use in the medical field.
+  components:
+  - type: Sprite
+    sprite: _Misfits/Clothing/SuperMutant/follower_gloves.rsi
+  - type: Clothing
+    sprite: _Misfits/Clothing/SuperMutant/follower_gloves.rsi
+  - type: Tag
+    tags:
+    - SuperMutantWearable
