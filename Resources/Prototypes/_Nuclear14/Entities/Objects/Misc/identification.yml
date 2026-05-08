@@ -699,6 +699,16 @@
 # Followers
 - type: entity
   parent: N14IDDoctor
+  id: N14IDDoctorFollower # specifically so the yml linter stops crying
+  name: followers ID
+  description: An ID card worn by the Followers of the Apocalypse.
+  components:
+  - type: Tag
+    tags:
+    - IdCardFollowers
+
+- type: entity
+  parent: N14IDDoctor
   id: N14IDFollowerVolunteer
   name: followers (volunteer) ID
   description: An ID card worn by the Followers of the Apocalypse.
