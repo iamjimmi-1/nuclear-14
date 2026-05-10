@@ -39,7 +39,9 @@
   id: SuperMutantVaultSuitGear
   equipment:
     jumpsuit: ClothingSuperMutantVaultSuit
-
+    id: N14ClothingNeckDogtags # #Misfits Change - wastelander supermutants get dogtag IDs
+    ears: MisfitsClothingHeadsetWastelandScrap
+    
 # #Misfits Add - Nightkin variant with its own whitelist entry.
 - type: job
   id: Nightkin
@@ -55,7 +57,7 @@
   whitelisted: true
   hideWithoutWhitelist: true
   spawnLoadout: true
-  startingGear: SuperMutantVaultSuitGear
+  startingGear: NightkinVaultSuitGear # #Misfits changed to nightkin starting gear
   applyTraits: true
   requirements:
     - !type:CharacterSpeciesRequirement
@@ -69,6 +71,14 @@
           - PlayerSuperMutant
           - Wastelander
 
+# #Misfits changed to nightkin starting gear
+- type: startingGear
+  id: NightkinVaultSuitGear
+  equipment:
+    jumpsuit: ClothingSuperMutantVaultSuit
+    ears: MisfitsClothingHeadsetWastelandScrap
+  inhand:
+    -  MisfitsStealthBoy # # Misfits: Add - stealthboy for nightkin role on spawn
 - type: playTimeTracker
   id: Nightkin
 
