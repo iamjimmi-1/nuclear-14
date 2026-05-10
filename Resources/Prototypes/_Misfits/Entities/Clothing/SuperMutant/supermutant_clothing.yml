@@ -430,3 +430,47 @@
   - type: Tag
     tags:
     - SuperMutantWearable
+
+  # Fancy suits for fancy people
+
+- type: entity
+  parent: [UnsensoredClothingUniformBase, AllowSuitStorageClothing]
+  id: ClothingSuperMutantZootSuit
+  name: supermutant zoot suit
+  description: A large rich looking suit designed for the rich, and the big.
+  components:
+  - type: Sprite
+    sprite: _Misfits/Clothing/SuperMutant/zoot_suit.rsi
+  - type: Clothing
+    sprite: _Misfits/Clothing/SuperMutant/zoot_suit.rsi
+  - type: Tag
+    tags:
+    - SuperMutantWearable
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingSuperMutantZootHat
+  name: super mutant zoot hat
+  description: A large, fancy hat designed for the rich, and the big.
+  components:
+  - type: Sprite
+    sprite: _Misfits/Clothing/SuperMutant/zoot_hat.rsi
+  - type: Clothing
+    sprite: _Misfits/Clothing/SuperMutant/zoot_hat.rsi
+  - type: Tag
+    tags:
+    - SuperMutantWearable
+
+- type: entity
+  parent: ClothingShoesBase
+  id: ClothingSuperMutantZootBoot
+  name: supermutant zoot boots
+  description: Large, fancy boots designed for the rich, and the big
+  components:
+  - type: Sprite
+    sprite: _Misfits/Clothing/SuperMutant/zoot_boot.rsi
+  - type: Clothing
+    sprite: _Misfits/Clothing/SuperMutant/zoot_boot.rsi
+  - type: Tag
+    tags:
+    - SuperMutantWearable
