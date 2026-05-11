@@ -120,6 +120,6 @@
       jobs:
       - CaesarLegionCenturion
     - !type:CharacterItemGroupRequirement
-      group: N14LoadoutMelee
+      group: N14LoadoutHands
   items:
     - N14ClothingHandsPowerFistGoliath
