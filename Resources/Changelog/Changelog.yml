@@ -4885,3 +4885,10 @@ Entries:
   id: 5864
   time: '2026-05-11T22:48:37.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/484
+- author: Dpellowski
+  changes:
+    - type: Fix
+      message: Trait bug
+  id: 5865
+  time: '2026-05-12T01:30:09.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/486
