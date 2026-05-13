@@ -14,7 +14,6 @@
     noRot: true
   - type: MovementSpeedModifier
     acceleration: 8
-    MinimumFrictionSpeed: 1
     friction: 1
     baseWalkSpeed: 8
     baseSprintSpeed: 10
