@@ -32,7 +32,7 @@ public sealed partial class UgQualtothWorshipperComponent : Component
 
     /// <summary>Cooldown between completed prayers.</summary>
     [DataField]
-    public TimeSpan PrayCooldown = TimeSpan.FromMinutes(5);
+    public TimeSpan PrayCooldown = TimeSpan.FromMinutes(20);
 
     /// <summary>Devotion gained per successful prayer.</summary>
     [DataField]

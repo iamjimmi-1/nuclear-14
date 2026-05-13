@@ -413,14 +413,19 @@ public sealed class FactionWarSystem : EntitySystem
         }
 
         // Create war entry
+        var declaredAgainstCharacterName = targetSession.AttachedEntity is { } tgt ? Name(tgt) : "Unknown";
+
         var warEntry = new PlayerWarEntry
         {
             DeclaredByPlayer = player.UserId,
             DeclaredByCharacterName = Name(playerEntity),
             DeclaredByJobName = "Unknown",
             DeclaredAgainstPlayer = msg.TargetPlayer,
-            DeclaredAgainstCharacterName = targetSession.AttachedEntity is { } tgt ? Name(tgt) : "Unknown",
+            DeclaredAgainstCharacterName = declaredAgainstCharacterName,
             SideName1 = msg.SideName1.Trim(),
+            SideName2 = string.IsNullOrWhiteSpace(declaredAgainstCharacterName)
+                ? "Player 2's Side"
+                : $"{declaredAgainstCharacterName}'s Side",
             Reason = reason,
             Phase = WarPhase.Pending,
         };
@@ -472,7 +477,7 @@ public sealed class FactionWarSystem : EntitySystem
             $"WAR DECLARED\n" +
             $"{warEntry.DeclaredByCharacterName} has declared war on {warEntry.DeclaredAgainstCharacterName}!\n" +
             $"Reason: \"{reason}\"\n\n" +
-            $"War begins in 5 minutes. {warEntry.DeclaredAgainstCharacterName} must accept via GUI.",
+            $"War begins in 5 minutes. {warEntry.DeclaredAgainstCharacterName} /warjoin to pick a side (MANDATORY TO BE APART OF WAR). ",
             Color.OrangeRed);
 
         SendResult(player, true, $"War declared. Awaiting {warEntry.DeclaredAgainstCharacterName}'s response (5 min timeout).");
