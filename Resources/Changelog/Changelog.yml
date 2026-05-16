@@ -5154,3 +5154,28 @@ Entries:
   id: 5895
   time: '2026-05-16T01:42:19.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/527
+- author: Sirius
+  changes:
+    - type: Remove
+      message: >-
+        In strict adherence to their stance on anti-proliferation and usage of
+        nuclear weaponry, the Brotherhood has elected to dismantle one of its
+        bunker's nuclear silos, as well as the warhead contained within.
+    - type: Add
+      message: >-
+        With the materials the Brotherhood has gained from the dismantling of
+        one of its Silos, it was able to construct an enclosure, provide some
+        equipment to the medical bay in the form of a handheld health analyzer
+        and a doctors syringe, as well as some equipment to the brig in the form
+        of a baton and some handcuffs.
+    - type: Add
+      message: >-
+        Timmy the Deathclaw, a mostly tamed Deathclaw, was put into the recently
+        constructed enclosure. Unfortunately, it murdered and devoured all three
+        serfs responsible for its relocation into the enclosure. This means
+        Timmy is currently in the Scribe's custody out West while they figure
+        out how to make sure Timmy can't hurt anyone else again. Expect to see
+        Timmy soon!
+  id: 5896
+  time: '2026-05-16T02:05:09.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/528
