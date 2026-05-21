@@ -5461,3 +5461,10 @@ Entries:
   id: 5920
   time: '2026-05-21T01:03:47.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/565
+- author: NajaTheNaja
+  changes:
+    - type: Add
+      message: NCRPlatoonLeader Spawnpoint
+  id: 5921
+  time: '2026-05-21T01:39:14.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/568
