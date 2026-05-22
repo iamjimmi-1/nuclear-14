@@ -247,7 +247,7 @@
       - type: NpcFactionMember
         factions:
           - PlayerSuperMutant  # keeps Loremaster/perk detection working
-          - Ranger                # recognised as ally by NCR faction AI and tabs
+          - Rangers            # recognised as ally by NCR faction AI and tabs
 
 - type: startingGear
   id: SuperMutantNCRRangerGear
