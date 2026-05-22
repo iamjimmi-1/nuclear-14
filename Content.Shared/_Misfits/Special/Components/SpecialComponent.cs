@@ -3,7 +3,7 @@ using Robust.Shared.GameStates;
 namespace Content.Shared._Misfits.Special.Components;
 
 /// <summary>
-/// Runtime S.P.E.C.I.A.L. values for a character.
+/// Runtime SPECIAL values for a character.
 /// Base values come from the character profile; temporary modifiers are updated through SharedSpecialSystem.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]

@@ -2,7 +2,9 @@ using Content.Shared._Misfits.Special;
 using Content.Shared._Misfits.Special.Components;
 using Content.Shared.Damage;
 using Content.Shared.Projectiles;
+using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Random;
 
 namespace Content.Server._Misfits.Special;
@@ -16,25 +18,12 @@ public sealed class SpecialCombatSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<GetMeleeDamageEvent>(OnGetMeleeDamage);
-        SubscribeLocalEvent<MeleeHitEvent>(OnMeleeHit);
+        SubscribeLocalEvent<MeleeWeaponComponent, MeleeHitEvent>(OnMeleeHit);
         SubscribeLocalEvent<ProjectileComponent, ProjectileHitEvent>(OnProjectileHit);
         SubscribeLocalEvent<SpecialComponent, SpecialModifyHitscanDamageEvent>(OnModifyHitscanDamage);
     }
 
-    private void OnGetMeleeDamage(ref GetMeleeDamageEvent args)
-    {
-        if (!TryComp<SpecialComponent>(args.User, out var special))
-            return;
-
-        var tuning = _special.GetTuning();
-        var delta = _special.GetEffectDelta(args.User, SpecialStat.Strength, special);
-        var multiplier = 1f + delta * tuning.StrengthMeleeDamageMultiplierPerPoint;
-
-        args.Damage *= MathF.Max(0.1f, multiplier);
-    }
-
-    private void OnMeleeHit(MeleeHitEvent args)
+    private void OnMeleeHit(EntityUid uid, MeleeWeaponComponent component, MeleeHitEvent args)
     {
         if (!args.IsHit || args.HitEntities.Count == 0)
             return;
@@ -43,8 +32,23 @@ public sealed class SpecialCombatSystem : EntitySystem
             return;
 
         var damage = args.BaseDamage;
-        if (TryApplyLuckCritical(args.User, ref damage, special))
-            args.BonusDamage += damage - args.BaseDamage;
+        ApplyStrengthMeleeModifier(args.User, ref damage, special);
+
+        TryApplyLuckCritical(args.User, ref damage, special, null);
+
+        args.BonusDamage += damage - args.BaseDamage;
+    }
+
+    private void ApplyStrengthMeleeModifier(EntityUid user, ref DamageSpecifier damage, SpecialComponent special)
+    {
+        var tuning = _special.GetTuning();
+        var delta = _special.GetCurvedEffectDelta(user, SpecialStat.Strength, special);
+
+        if (delta == 0f)
+            return;
+
+        var multiplier = 1f + delta * tuning.StrengthMeleeDamageMultiplierPerPoint;
+        damage *= MathF.Max(0.1f, multiplier);
     }
 
     private void OnProjectileHit(Entity<ProjectileComponent> ent, ref ProjectileHitEvent args)
@@ -54,26 +58,47 @@ public sealed class SpecialCombatSystem : EntitySystem
             return;
 
         var damage = args.Damage;
-        if (TryApplyLuckCritical(args.Shooter.Value, ref damage, special))
+        if (TryApplyLuckCritical(args.Shooter.Value, ref damage, special, ent.Comp.Weapon))
             args.Damage = damage;
     }
 
     private void OnModifyHitscanDamage(Entity<SpecialComponent> ent, ref SpecialModifyHitscanDamageEvent args)
     {
         var damage = args.Damage;
-        if (TryApplyLuckCritical(ent.Owner, ref damage, ent.Comp))
+        if (TryApplyLuckCritical(ent.Owner, ref damage, ent.Comp, args.Weapon))
             args.Damage = damage;
     }
 
-    private bool TryApplyLuckCritical(EntityUid user, ref DamageSpecifier damage, SpecialComponent special)
+    private bool TryApplyLuckCritical(EntityUid user, ref DamageSpecifier damage, SpecialComponent special, EntityUid? weapon)
     {
-        var tuning = _special.GetTuning();
-        var chance = _special.GetLuckRollChance(user, 0f, tuning.LuckCriticalChancePerPoint, special);
+        var chance = GetLuckCriticalChance(user, special, weapon);
 
         if (chance <= 0f || !_random.Prob(chance))
             return false;
 
+        var tuning = _special.GetTuning();
         damage *= tuning.LuckCriticalDamageMultiplier;
         return true;
+    }
+
+    private float GetLuckCriticalChance(EntityUid user, SpecialComponent special, EntityUid? weapon)
+    {
+        var tuning = _special.GetTuning();
+
+        if (weapon == null)
+            return _special.GetLuckRollChance(user, 0f, tuning.LuckCriticalChancePerPoint, special);
+
+        var delta = _special.GetCurvedEffectDelta(user, SpecialStat.Luck, special);
+        var ammoCapacity = GetWeaponAmmoCapacity(weapon.Value);
+        var singleShotChance = tuning.LuckSingleShotCriticalChanceAtTen * delta / SharedSpecialSystem.GetCurvedEffectDelta(SpecialProfile.Maximum);
+        return Math.Clamp(singleShotChance / ammoCapacity, 0f, 1f);
+    }
+
+    private int GetWeaponAmmoCapacity(EntityUid weapon)
+    {
+        var ammo = new GetAmmoCountEvent();
+        RaiseLocalEvent(weapon, ref ammo, false);
+
+        return Math.Max(1, ammo.Capacity);
     }
 }

@@ -154,6 +154,10 @@ namespace Content.Client.Lobby.UI
 
         public event Action<HumanoidCharacterProfile, int>? OnProfileChanged;
 
+        private int LoadoutPointBudget =>
+            Math.Max(0, _cfgManager.GetCVar(CCVars.GameLoadoutsPoints)
+                + SharedSpecialSystem.GetCharismaLoadoutPointModifier(SpecialProfile.EnsureValid(Profile?.Special).Charisma));
+
         [ValidatePrototypeId<GuideEntryPrototype>]
         private const string DefaultSpeciesGuidebook = "Species";
 
@@ -2469,6 +2473,8 @@ namespace Content.Client.Lobby.UI
             Profile = Profile.WithSpecial(special);
             IsDirty = true;
             UpdateSpecialControls();
+            RemoveSuperfluousLoadouts();
+            UpdateLoadoutPreferences();
         }
 
         private static string GetSpecialNameLoc(SpecialStat stat)
@@ -2978,7 +2984,7 @@ namespace Content.Client.Lobby.UI
 
         private void UpdateLoadoutPreferences()
         {
-            var points = _cfgManager.GetCVar(CCVars.GameLoadoutsPoints);
+            var points = LoadoutPointBudget;
             LoadoutPointsBar.Value = points;
             LoadoutPointsLabel.Text = Loc.GetString("humanoid-profile-editor-loadouts-points-label", ("points", points), ("max", points));
 
@@ -3024,7 +3030,7 @@ namespace Content.Client.Lobby.UI
             showUnusable ??= LoadoutsShowUnusableButton.Pressed;
 
             // Reset loadout points so you don't get -14 points or something for no reason
-            var points = _cfgManager.GetCVar(CCVars.GameLoadoutsPoints);
+            var points = LoadoutPointBudget;
             LoadoutPointsLabel.Text = Loc.GetString("humanoid-profile-editor-loadouts-points-label", ("points", points), ("max", points));
             LoadoutPointsBar.MaxValue = points;
             LoadoutPointsBar.Value = points;
@@ -3389,7 +3395,7 @@ namespace Content.Client.Lobby.UI
             if (Profile?.LoadoutPreferences == null)
                 return;
 
-            var points = _cfgManager.GetCVar(CCVars.GameLoadoutsPoints);
+            var points = LoadoutPointBudget;
             foreach (var pref in Profile.LoadoutPreferences
                 .Where(l => l.Selected)
                 .OrderByDescending(l => _prototypeManager.Index<LoadoutPrototype>(l.LoadoutName)?.Cost))

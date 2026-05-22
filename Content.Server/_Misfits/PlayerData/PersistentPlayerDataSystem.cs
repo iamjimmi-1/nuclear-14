@@ -152,7 +152,7 @@ public sealed class PersistentPlayerDataSystem : EntitySystem
 
     // ── SPECIAL confirmation ───────────────────────────────────────────────────
 
-    // #Misfits Add - Validates and applies the player's S.P.E.C.I.A.L. allocation then locks it.
+    // #Misfits Add - Validates and applies the player's SPECIAL allocation then locks it.
     private void OnConfirmSpecialAllocation(ConfirmSpecialAllocationEvent msg, EntitySessionEventArgs args)
     {
         var entity = args.SenderSession.AttachedEntity;
@@ -196,7 +196,7 @@ public sealed class PersistentPlayerDataSystem : EntitySystem
         comp.Luck         = msg.Luck;
         comp.StatsConfirmed = true;
 
-        AppendHistory(comp, $"Allocated S.P.E.C.I.A.L.: S{msg.Strength} P{msg.Perception} E{msg.Endurance} C{msg.Charisma} I{msg.Intelligence} A{msg.Agility} L{msg.Luck}.");
+        AppendHistory(comp, $"Allocated SPECIAL: S{msg.Strength} P{msg.Perception} E{msg.Endurance} C{msg.Charisma} I{msg.Intelligence} A{msg.Agility} L{msg.Luck}.");
         Dirty(entity.Value, comp);
         SavePlayer(comp);
 
@@ -244,19 +244,20 @@ public sealed class PersistentPlayerDataSystem : EntitySystem
                 comp.RoundsPlayed = saved.RoundsPlayed;
                 comp.HistoryLog = DeserializeHistoryLog(saved.HistoryLog);
                 comp.StatsConfirmed = saved.StatsConfirmed; // #Misfits Fix - only lock if the player explicitly confirmed previously
+
+                ApplyPersistentSpecialToComponent(uid, comp);
             }
             else
             {
                 // First-time character — welcome entry
                 AppendHistory(comp, "Arrived in the Wasteland for the first time.");
+                SyncPersistentSpecialFromComponent(uid, comp);
             }
         }
         catch (Exception ex)
         {
             _log.Error($"Failed to load player data for {characterName}: {ex}");
         }
-
-        SyncPersistentSpecialFromComponent(uid, comp);
 
         // Increment round counter exactly once per spawn
         if (!comp.RoundCountedThisRound)
@@ -275,6 +276,23 @@ public sealed class PersistentPlayerDataSystem : EntitySystem
         // #Misfits Add - Trigger stat-driven gameplay effects (stamina pool, movement speed).
         RaiseLocalEvent(uid, new SpecialStatsReadyEvent());
         _movement.RefreshMovementSpeedModifiers(uid);
+    }
+
+    private void ApplyPersistentSpecialToComponent(EntityUid uid, PersistentPlayerDataComponent comp)
+    {
+        var special = EnsureComp<SpecialComponent>(uid);
+        var profile = new SpecialProfile
+        {
+            Strength = comp.Strength,
+            Perception = comp.Perception,
+            Endurance = comp.Endurance,
+            Charisma = comp.Charisma,
+            Intelligence = comp.Intelligence,
+            Agility = comp.Agility,
+            Luck = comp.Luck,
+        };
+
+        _special.TrySetBaseValues(uid, profile, special);
     }
 
     private void SyncPersistentSpecialFromComponent(EntityUid uid, PersistentPlayerDataComponent comp, SpecialComponent? special = null)

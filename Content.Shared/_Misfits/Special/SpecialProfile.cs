@@ -3,7 +3,7 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._Misfits.Special;
 
 /// <summary>
-/// Serializable character-profile copy of base S.P.E.C.I.A.L. values.
+/// Serializable character-profile copy of base SPECIAL values.
 /// Runtime modifiers live on <see cref="SpecialComponent"/>.
 /// </summary>
 [DataDefinition]
@@ -14,7 +14,8 @@ public sealed partial class SpecialProfile
     public const int Maximum = 10;
     public const int DefaultValue = 5;
     public const int BonusPoints = 5;
-    public const int DefaultTotal = DefaultValue * 7;
+    public const int ActiveStatCount = 7;
+    public const int DefaultTotal = DefaultValue * ActiveStatCount;
     public const int MaxTotal = DefaultTotal + BonusPoints;
 
     [DataField]
@@ -78,7 +79,9 @@ public sealed partial class SpecialProfile
         if (profile == null)
             return Default();
 
-        return profile.IsValid ? profile.Clone() : Default();
+        var clone = profile.Clone();
+
+        return clone.IsValid ? clone : Default();
     }
 
     public int Get(SpecialStat stat)

@@ -35,7 +35,7 @@ public sealed class SpecialEnduranceSystem : EntitySystem
             return;
 
         var tuning = _special.GetTuning();
-        var delta = _special.GetEffectDelta(ent.Owner, SpecialStat.Endurance, ent.Comp);
+        var delta = _special.GetCurvedEffectDelta(ent.Owner, SpecialStat.Endurance, ent.Comp);
         var desired = delta * tuning.EnduranceStaminaCritThresholdPerPoint;
         var adjustment = desired - ent.Comp.AppliedStaminaCritThresholdModifier;
 

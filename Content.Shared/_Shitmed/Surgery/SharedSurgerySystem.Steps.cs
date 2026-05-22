@@ -140,6 +140,7 @@ public abstract partial class SharedSurgerySystem
                 foreach (var (key, compToAdd) in compsToAdd)
                     organ.OnAdd[key] = compToAdd;
 
+                Dirty(organId, organ);
                 EnsureComp<OrganEffectComponent>(organId);
                 RaiseLocalEvent(organId, new OrganComponentsModifyEvent(args.Body, true));
             }
@@ -161,6 +162,8 @@ public abstract partial class SharedSurgerySystem
                 RaiseLocalEvent(organId, new OrganComponentsModifyEvent(args.Body, false));
                 foreach (var key in compsToRemove.Keys)
                     organ.OnAdd.Remove(key);
+
+                Dirty(organId, organ);
             }
         }
 
@@ -257,7 +260,10 @@ public abstract partial class SharedSurgerySystem
             foreach (var (organSlotId, compsToRemove) in ent.Comp.RemoveOrganOnAdd)
             {
                 if (!organSlotIdToOrgan.TryGetValue(organSlotId, out var organ) || organ.OnAdd == null)
-                    continue;
+                {
+                    args.Cancelled = true;
+                    return;
+                }
 
                 if (compsToRemove.Keys.Any(key => organ.OnAdd.ContainsKey(key)))
                 {

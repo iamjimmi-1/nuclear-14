@@ -12,7 +12,7 @@ public sealed class SpecialGetCommand : IConsoleCommand
     [Dependency] private readonly IEntityManager _entities = default!;
 
     public string Command => "specialget";
-    public string Description => "Shows an entity's S.P.E.C.I.A.L. values.";
+    public string Description => "Shows an entity's SPECIAL values.";
     public string Help => "Usage: specialget [entityUid]";
 
     public void Execute(IConsoleShell shell, string argStr, string[] args)
@@ -64,8 +64,8 @@ public sealed class SpecialSetCommand : IConsoleCommand
     [Dependency] private readonly IEntityManager _entities = default!;
 
     public string Command => "specialset";
-    public string Description => "Sets an entity's base S.P.E.C.I.A.L. stat.";
-    public string Help => "Usage: specialset <entityUid> <stat> <1-10>";
+    public string Description => "Sets an entity's base SPECIAL stat.";
+    public string Help => "Usage: specialset <entityUid> <strength|perception|endurance|charisma|intelligence|agility|luck> <1-10>";
 
     public void Execute(IConsoleShell shell, string argStr, string[] args)
     {
@@ -109,16 +109,25 @@ public sealed class SpecialSetCommand : IConsoleCommand
             case "s":
             case "str":
             case "strength":
+            case "v":
+            case "vig":
+            case "vigor":
                 stat = SpecialStat.Strength;
                 return true;
             case "p":
             case "per":
             case "perception":
+            case "aw":
+            case "aware":
+            case "awareness":
                 stat = SpecialStat.Perception;
                 return true;
             case "e":
             case "end":
             case "endurance":
+            case "u":
+            case "util":
+            case "utility":
                 stat = SpecialStat.Endurance;
                 return true;
             case "c":
@@ -134,6 +143,9 @@ public sealed class SpecialSetCommand : IConsoleCommand
             case "a":
             case "agi":
             case "agility":
+            case "t":
+            case "tmp":
+            case "tempo":
                 stat = SpecialStat.Agility;
                 return true;
             case "l":
@@ -154,8 +166,8 @@ public sealed class SpecialModCommand : IConsoleCommand
     [Dependency] private readonly IEntityManager _entities = default!;
 
     public string Command => "specialmod";
-    public string Description => "Adds a temporary S.P.E.C.I.A.L. modifier to an entity.";
-    public string Help => "Usage: specialmod <entityUid> <stat> <modifier> [durationSeconds] [source]";
+    public string Description => "Adds a temporary SPECIAL modifier to an entity.";
+    public string Help => "Usage: specialmod <entityUid> <strength|perception|endurance|charisma|intelligence|agility|luck> <modifier> [durationSeconds] [source]";
 
     public void Execute(IConsoleShell shell, string argStr, string[] args)
     {

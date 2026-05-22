@@ -63,6 +63,9 @@ public sealed class SharedSpecialSystem : EntitySystem
 
     public int GetBase(EntityUid uid, SpecialStat stat, SpecialComponent? component = null)
     {
+        if (!SpecialStats.IsEnabled(stat))
+            return SpecialProfile.DefaultValue;
+
         if (!Resolve(uid, ref component, false))
             return SpecialProfile.DefaultValue;
 
@@ -71,6 +74,9 @@ public sealed class SharedSpecialSystem : EntitySystem
 
     public int GetModifier(EntityUid uid, SpecialStat stat, SpecialComponent? component = null)
     {
+        if (!SpecialStats.IsEnabled(stat))
+            return 0;
+
         if (!Resolve(uid, ref component, false))
             return 0;
 
@@ -79,6 +85,9 @@ public sealed class SharedSpecialSystem : EntitySystem
 
     public int GetUnclampedEffective(EntityUid uid, SpecialStat stat, SpecialComponent? component = null)
     {
+        if (!SpecialStats.IsEnabled(stat))
+            return SpecialProfile.DefaultValue;
+
         if (!Resolve(uid, ref component, false))
             return SpecialProfile.DefaultValue;
 
@@ -95,6 +104,33 @@ public sealed class SharedSpecialSystem : EntitySystem
         return GetEffective(uid, stat, component) - SpecialProfile.DefaultValue;
     }
 
+    public float GetCurvedEffectDelta(EntityUid uid, SpecialStat stat, SpecialComponent? component = null)
+    {
+        return GetCurvedEffectDelta(GetEffective(uid, stat, component));
+    }
+
+    public static float GetCurvedEffectDelta(int effective)
+    {
+        return Math.Clamp(effective, SpecialProfile.Minimum, SpecialProfile.Maximum) switch
+        {
+            1 => -5f,
+            2 => -3.5f,
+            3 => -2.25f,
+            4 => -1f,
+            5 => 0f,
+            6 => 1f,
+            7 => 2.25f,
+            8 => 3.75f,
+            9 => 5.5f,
+            _ => 7.5f,
+        };
+    }
+
+    public static int GetCharismaLoadoutPointModifier(int charisma)
+    {
+        return (int) Math.Round(GetCurvedEffectDelta(charisma) * 2f, MidpointRounding.AwayFromZero);
+    }
+
     public bool HasRequirement(EntityUid uid, SpecialStat stat, int minimum, SpecialComponent? component = null)
     {
         return GetEffective(uid, stat, component) >= minimum;
@@ -102,7 +138,7 @@ public sealed class SharedSpecialSystem : EntitySystem
 
     public bool TrySetBase(EntityUid uid, SpecialStat stat, int value, SpecialComponent? component = null)
     {
-        if (!SpecialProfile.IsWithinBounds(value) || !Resolve(uid, ref component, false))
+        if (!SpecialStats.IsEnabled(stat) || !SpecialProfile.IsWithinBounds(value) || !Resolve(uid, ref component, false))
             return false;
 
         SetBase(component, stat, value);
@@ -140,7 +176,7 @@ public sealed class SharedSpecialSystem : EntitySystem
         string source = "",
         SpecialComponent? component = null)
     {
-        if (modifier == 0 || !Resolve(uid, ref component, false))
+        if (modifier == 0 || !SpecialStats.IsEnabled(stat) || !Resolve(uid, ref component, false))
             return false;
 
         ApplyTemporary(uid, component, stat, modifier);
@@ -174,7 +210,7 @@ public sealed class SharedSpecialSystem : EntitySystem
 
     public float GetLuckRollChance(EntityUid uid, float baseChance, float chancePerPoint, SpecialComponent? component = null)
     {
-        var delta = Math.Max(0, GetEffectDelta(uid, SpecialStat.Luck, component));
+        var delta = GetCurvedEffectDelta(uid, SpecialStat.Luck, component);
         return Math.Clamp(baseChance + delta * chancePerPoint, 0f, 1f);
     }
 

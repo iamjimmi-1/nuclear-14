@@ -40,11 +40,11 @@ public sealed class CharacterUIController : UIController, IOnStateEntered<Gamepl
     private static readonly string[] SpecialNames = { "Strength", "Perception", "Endurance", "Charisma", "Intelligence", "Agility", "Luck" };
     private static readonly string[] SpecialDesc =
     {
-        "Increases melee damage and heavy weapon handling. Reduces movement penalties from heavy equipment.",
+        "Increases melee damage and heavy weapon handling.",
         "Improves ranged accuracy and reduces weapon recoil.",
         "Increases maximum health, radiation resistance, and stamina.",
-        "Reduces prices from vendors. Improves social fluency and negotiations.",
-        "Improves crafting quality. Higher values yield better results when crafting items.",
+        "Changes available loadout points by 2 per point above or below 5.",
+        "Speeds up crafting.",
         "Increases movement speed.",
         "Improves loot quality when scavenging junkpiles and containers.",
     };
@@ -486,7 +486,7 @@ public sealed class CharacterUIController : UIController, IOnStateEntered<Gamepl
     private void UpdatePointsLabel()
     {
         if (_specialWindow == null) return;
-        _specialWindow.SpecialPointsLabel.Text = $"Available points: {_allocPoints}";
+        _specialWindow.SpecialPointsLabel.Text = $"Available SPECIAL points: {_allocPoints}";
     }
 
     // #Misfits Add - Apply/Cancel/Confirm flow for SPECIAL allocation
@@ -512,8 +512,13 @@ public sealed class CharacterUIController : UIController, IOnStateEntered<Gamepl
         // Permanently lock the allocation; send to server
         if (_specialWindow == null || _localStatsConfirmed) return;
         _characterInfo.SendConfirmSpecialAllocation(
-            _allocValues[0], _allocValues[1], _allocValues[2], _allocValues[3],
-            _allocValues[4], _allocValues[5], _allocValues[6]);
+            _allocValues[0],
+            _allocValues[1],
+            _allocValues[2],
+            _allocValues[3],
+            _allocValues[4],
+            _allocValues[5],
+            _allocValues[6]);
 
         // Immediately update local state so the UI reflects the lock without waiting for a server echo
         _localStatsConfirmed = true;
