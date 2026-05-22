@@ -1,5 +1,7 @@
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
+using Content.Shared._Misfits.Special;
+using Content.Shared._Misfits.Special.Components;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Body.Part;
 using Content.Shared.Body.Organ;
@@ -790,8 +792,20 @@ public abstract partial class SharedSurgerySystem
         if (TryComp(user, out SurgerySpeedModifierComponent? surgerySpeedMod))
             speed *= surgerySpeedMod.SpeedModifier;
 
+        speed *= GetIntelligenceSurgerySpeed(user);
+
         return stepComp.Duration / speed;
     }
+
+    private float GetIntelligenceSurgerySpeed(EntityUid user)
+    {
+        if (!TryComp<SpecialComponent>(user, out var special))
+            return 1f;
+
+        var intelligence = _special.GetEffective(user, SpecialStat.Intelligence, special);
+        return MathF.Max(0.1f, 1f + (intelligence - SpecialProfile.DefaultValue) * 0.1f);
+    }
+
     private (Entity<SurgeryComponent> Surgery, int Step)? GetNextStep(EntityUid body, EntityUid part, Entity<SurgeryComponent?> surgery, List<EntityUid> requirements)
     {
         if (!Resolve(surgery, ref surgery.Comp))
