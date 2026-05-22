@@ -581,7 +581,7 @@
       # conditions:
       # - !type:ReagentThreshold
       #   min: 25
-      -
+
 - type: reagent
   id: Epoetine
   name: reagent-name-epoetine
