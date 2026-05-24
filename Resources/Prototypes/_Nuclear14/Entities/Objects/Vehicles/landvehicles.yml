@@ -5,6 +5,13 @@
   description: A clean green motorbike.
   components:
   - type: Vehicle
+  - type: Strap
+    # #Misfits Change - brahdo riding now requires the shared riding perk instead of any humanoid.
+    whitelist:
+      requireAll: true
+      components:
+      - HumanoidAppearance
+      - RidingPerk
   - type: Sprite
     sprite: _Nuclear14/Objects/Vehicles/bikesbuggy.rsi
     layers:

@@ -8,6 +8,8 @@ using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.NPC;
 using Content.Shared.Standing;
+using Content.Shared.Weapons.Melee.Events;
+
 
 namespace Content.Shared._NC.Mountable;
 
@@ -34,6 +36,7 @@ public sealed class SharedMountSystem : EntitySystem
         // triggered BuckleTransformCheck, causing instant unbuckle & teleports.
         SubscribeLocalEvent<MountableComponent, MoveEvent>(OnMountMove);
         SubscribeLocalEvent<RiderComponent, MobStateChangedEvent>(OnMobStateChanged);
+        SubscribeLocalEvent<MountableComponent, MeleeHitEvent>(OnMeleeHit);
 
         SubscribeLocalEvent<MountableComponent, DownAttemptEvent>(OnDownAttempt);
         SubscribeLocalEvent<MountableComponent, StrappedEvent>(OnStrapped);
@@ -58,6 +61,11 @@ public sealed class SharedMountSystem : EntitySystem
         var direction = args.NewRotation.GetDir();
         var offset = ent.Comp.RiderOffset + ent.Comp.DirectionOffsets.GetValueOrDefault(direction, Vector2.Zero);
         _transform.SetLocalPositionNoLerp(rider, offset);
+    }
+    private void OnMeleeHit(Entity<MountableComponent> ent, ref MeleeHitEvent args)
+    {
+        if (args.User == ent.Comp.Rider) // Don't hit your own horse
+            args.Handled = true;
     }
 
     /// <summary>

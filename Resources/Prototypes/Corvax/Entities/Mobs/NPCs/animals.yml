@@ -20,8 +20,8 @@
         density: 50
         mask:
         - MobMask
-        layer:
-        - MobLayer
+#        layer:
+#        - MobLayer
   - type: DamageStateVisuals
     states:
       Alive:
