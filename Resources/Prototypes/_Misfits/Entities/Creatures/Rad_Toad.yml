@@ -38,9 +38,6 @@
       - HumanoidAppearance
       - TribalHuntParticipant
   - type: Mountable
-  - type: Tag
-    tags:
-    - Radtoad
   - type: MovementSpeedModifier
     modifiers:
     baseWalkSpeed: 4.5
