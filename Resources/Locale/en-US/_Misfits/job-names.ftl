@@ -140,3 +140,5 @@ undecided-loadout-category-misfits-pal-wattz-description =
     Includes 1 Bozar, 1 LMG magazine, 1 12.7mm pistol,
     2 12.7mm pistol magazines, 1 roll of gauze, 1 stimpak,
     and 1 K ration MRE.
+
+
