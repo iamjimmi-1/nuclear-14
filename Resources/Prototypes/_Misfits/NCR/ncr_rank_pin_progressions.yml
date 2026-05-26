@@ -66,7 +66,7 @@
     - min: 0
       entity: ClothingNeckPinNCRSecondLieutenant
     - min: 72000   # 20 hours
-      entity: ClothingNeckPinNCRFirstlLieutenant
+      entity: ClothingNeckPinNCRFirstLieutenant
 
 # Squad Leaders: CPL (E-4) → SGT (E-5) at 20h → SSG (E-6) at 40h → SFC (E-7) at 60h
 # All 4 map slots share the NCRSquadLeader tracker so time accumulates across slots.
