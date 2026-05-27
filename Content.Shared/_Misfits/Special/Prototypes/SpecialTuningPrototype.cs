@@ -59,13 +59,13 @@ public sealed partial class SpecialTuningPrototype : IPrototype
     public float CharismaTradeMultiplierPerPoint = 0.01333333f;
 
     [DataField("charismaWarcryRangeMultiplierPerPoint")]
-    public float CharismaWarcryRangeMultiplierPerPoint = 0.02f;
+    public float CharismaWarcryRangeMultiplierPerPoint = 0.006667f;
 
     [DataField("charismaWarcryDurationMultiplierPerPoint")]
-    public float CharismaWarcryDurationMultiplierPerPoint = 0.02f;
+    public float CharismaWarcryDurationMultiplierPerPoint = 0.006667f;
 
     [DataField("charismaWarcrySpeedMultiplierPerPoint")]
-    public float CharismaWarcrySpeedMultiplierPerPoint = 0.02f;
+    public float CharismaWarcrySpeedMultiplierPerPoint = 0.006667f;
 
     [DataField("charismaNeutralFollowerMinimum")]
     public int CharismaNeutralFollowerMinimum = 8;
