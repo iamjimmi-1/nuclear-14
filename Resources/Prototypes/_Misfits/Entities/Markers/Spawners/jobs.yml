@@ -266,18 +266,6 @@
 
 - type: entity
   parent: MisfitsSpawnPointCaesarLegionCenturion
-  id: MisfitsSpawnPointCaesarLegionForgemaster
-  name: Legion Forgemaster
-  components:
-  - type: SpawnPoint
-    job_id: CaesarLegionForgemaster
-  - type: Sprite
-    layers:
-      - state: green
-      - state: Warrior
-
-- type: entity
-  parent: MisfitsSpawnPointCaesarLegionCenturion
   id: MisfitsSpawnPointCaesarLegionLegionnaireVeteran
   name: Legion Veteran Legionary
   components:

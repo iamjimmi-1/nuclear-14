@@ -232,9 +232,9 @@
 
 - type: entity
   parent: N14IDPassportBlank
-  id: N14IDLegionaryMedalSilver3
-  name: legion Forgemaster Medallion
-  description: "A distinctive medal with the sign of the bull."
+  id: N14IDLegionaryMedalForgemaster
+  name: legion forgemaster medallion
+  description: "A Silver Medallion bearing the symbol of the Legion Forgemaster."
   components:
   - type: Sprite
     sprite: Corvax/Objects/Misc/identification.rsi
