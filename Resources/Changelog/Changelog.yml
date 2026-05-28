@@ -5912,3 +5912,10 @@ Entries:
   id: 5967
   time: '2026-05-27T22:05:29.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/616
+- author: Wazura
+  changes:
+    - type: Fix
+      message: Heat not CRITTING people
+  id: 5968
+  time: '2026-05-28T01:57:41.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/618
