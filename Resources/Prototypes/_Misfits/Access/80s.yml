@@ -14,6 +14,7 @@
   id: 80s
   tags:
   - 80s
+  - 80sSlave
 
 - type: accessGroup
   id: 80sSlave
@@ -25,6 +26,7 @@
   tags:
   - 80s
   - 80sHead
+  - 80sSlave
 
 
 # there are currently no ids with this access, remove this comment once this is done
