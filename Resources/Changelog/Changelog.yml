@@ -6164,3 +6164,10 @@ Entries:
   id: 5992
   time: '2026-05-31T13:59:31.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/648
+- author: Bradysgaming
+  changes:
+    - type: Tweak
+      message: Nerfed Unnatual Regen perk, Reduced price from 8 to 7 as a result.
+  id: 5993
+  time: '2026-05-31T22:08:06.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/650
