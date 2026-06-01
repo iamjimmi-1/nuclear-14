@@ -153,7 +153,7 @@ public sealed class WeatherSystem : SharedWeatherSystem
             return true;
         }
 
-        var visibilityRadius = 0f;
+        var visibilityRadius = float.MaxValue;
         foreach (var (protoId, data) in weather.Weather)
         {
             if (data.State != WeatherState.Starting && data.State != WeatherState.Running)
@@ -165,10 +165,10 @@ public sealed class WeatherSystem : SharedWeatherSystem
                 continue;
             }
 
-            visibilityRadius = MathF.Max(visibilityRadius, weatherProto.VisibilityClearRadius);
+            visibilityRadius = MathF.Min(visibilityRadius, weatherProto.VisibilityClearRadius);
         }
 
-        if (visibilityRadius <= 0f)
+        if (visibilityRadius == float.MaxValue)
             return true;
 
         if (!IsWeatherExposed(viewerXform.MapUid.Value, viewerXform) &&
@@ -409,6 +409,9 @@ public sealed class WeatherSystem : SharedWeatherSystem
         var duration = _random.NextFloat(
             (float) minDuration.TotalSeconds,
             (float) maxDuration.TotalSeconds);
+
+        if (weather.Duration > 0f)
+            duration = MathF.Min(duration, weather.Duration);
 
         return Timing.CurTime + TimeSpan.FromSeconds(duration);
     }
