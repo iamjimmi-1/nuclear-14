@@ -13,6 +13,8 @@
   temperature: 330
   duration: 500
   chance: 1
+  visibilityClearRadius: 5
+  visibilityClearBuffer: 2
   message: weather-ashfall
 
 - type: weather
@@ -41,8 +43,10 @@
       loop: true
       volume: -6
   temperature: 340
-  duration: 20
+  duration: 500
   chance: 1
+  visibilityClearRadius: 8
+  visibilityClearBuffer: 2
   showMessage: true
   sender: weather-announcement
   message: weather-ashfall-heavy
@@ -84,7 +88,7 @@
       volume: -6
   temperature: 300
   duration: 500
-  chance: 1
+  chance: 0 # Misfits: excluded from random weather pool
   message: weather-hail
 
 - type: weather
@@ -138,6 +142,8 @@
   temperature: 320
   duration: 500
   chance: 1
+  visibilityClearRadius: 8
+  visibilityClearBuffer: 2
   message: weather-sandstorm
 
 - type: weather
@@ -153,6 +159,8 @@
   temperature: 330
   duration: 500
   chance: 1
+  visibilityClearRadius: 6
+  visibilityClearBuffer: 2
   showMessage: true
   sender: weather-announcement
   message: weather-sandstorm-heavy
@@ -200,6 +208,8 @@
   temperature: 260
   duration: 500
   chance: 0 # Misfits: snow events are excluded from random weather pool
+  visibilityClearRadius: 6
+  visibilityClearBuffer: 2
   showMessage: true
   sender: weather-announcement
   message: weather-snowfall-heavy
