@@ -6350,3 +6350,10 @@ Entries:
   id: 6005
   time: '2026-06-02T00:17:14.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/661
+- author: qevie
+  changes:
+    - type: Tweak
+      message: Adjusted patrol ranger timelock
+  id: 6006
+  time: '2026-06-02T00:18:08.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/660
