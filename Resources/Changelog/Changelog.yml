@@ -6406,3 +6406,10 @@ Entries:
   id: 6011
   time: '2026-06-03T20:27:01.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/675
+- author: Tytos
+  changes:
+    - type: Add
+      message: Added legion and NCR civilians and traders
+  id: 6012
+  time: '2026-06-03T20:30:58.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/679
