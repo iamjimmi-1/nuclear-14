@@ -30,4 +30,4 @@
     group: NCR
     accountProto: N14ASRSAccountNCR
     acceptedCurrency: NCRDollars
-    categories:
+    categories: []
