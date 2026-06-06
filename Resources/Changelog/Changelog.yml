@@ -6556,3 +6556,12 @@ Entries:
   id: 6025
   time: '2026-06-06T04:39:06.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/704
+- author: Bradysgaming
+  changes:
+    - type: Add
+      message: put in the eighties ID's (still need their own sprites)
+    - type: Add
+      message: gave the 80's their own channel (Y) and headset (sprite needed too)
+  id: 6026
+  time: '2026-06-06T08:16:36.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/707
