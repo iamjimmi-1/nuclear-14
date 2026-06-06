@@ -6581,3 +6581,12 @@ Entries:
   id: 6028
   time: '2026-06-06T22:02:18.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/711
+- author: qevie
+  changes:
+    - type: Tweak
+      message: >-
+        More ranger recruit slots. Go my chuddies, you can finally get ranger
+        time.
+  id: 6029
+  time: '2026-06-06T22:02:48.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/709
