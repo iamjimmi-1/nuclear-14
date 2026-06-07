@@ -6629,3 +6629,10 @@ Entries:
   id: 6032
   time: '2026-06-07T22:11:29.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/722
+- author: Bradysgaming
+  changes:
+    - type: Remove
+      message: Removed Cold from unnatural regen, cant take the easy way anymore!
+  id: 6033
+  time: '2026-06-07T22:24:09.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/723
