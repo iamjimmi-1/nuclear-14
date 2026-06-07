@@ -6590,3 +6590,16 @@ Entries:
   id: 6029
   time: '2026-06-06T22:02:48.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/709
+- author: Squagg
+  changes:
+    - type: Fix
+      message: >-
+        Fixed some diagonal and slanted structures having their intended
+        rotations corrected incorrectly.
+    - type: Fix
+      message: >-
+        Fixed admin-spawned/cloned player bodies not receiving the selected
+        character profile's SPECIAL values.
+  id: 6030
+  time: '2026-06-07T15:04:49.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/716
