@@ -354,23 +354,23 @@ undecided-loadout-category-corvax-vexillarius-skirmisher-description =
     a buckler, a pilum spear, a healing poultice,
     2 K rations, and a ceramic flask.
 
-undecided-loadout-category-corvax-orator-preacher-name = Orator Preacher
-undecided-loadout-category-corvax-orator-preacher-description =
-    Includes a hunting rifle, a box of .308 ammo,
+undecided-loadout-category-corvax-optio-preacher-name = Optio Preacher
+undecided-loadout-category-corvax-optio-preacher-description =
+    Includes a Neostead, 2 12 Gauge ammo boxes,
     a .45 Colt pistol, 2 .45 magazines, a rope belt,
     2 smoke grenades, 2 bandages, 2 healing poultices,
     a healing powder, 2 K rations, and a ceramic flask.
 
-undecided-loadout-category-corvax-orator-defender-name = Orator Defender
-undecided-loadout-category-corvax-orator-defender-description =
-    Includes a hunting rifle, a box of .308 ammo,
+undecided-loadout-category-corvax-optio-defender-name = Optio Defender
+undecided-loadout-category-corvax-optio-defender-description =
+    Includes a Decorated tribal heavy club,
     a .45 Colt pistol, 2 .45 magazines, a rope belt,
     a smoke grenade, 2 healing poultices, a healing powder,
     2 K rations, and a ceramic flask.
 
-undecided-loadout-category-corvax-orator-inquisitor-name = Orator Inquisitor
-undecided-loadout-category-corvax-orator-inquisitor-description =
-    Includes a hunting rifle, a box of .308 ammo,
+undecided-loadout-category-corvax-optio-inquisitor-name = Optio Inquisitor
+undecided-loadout-category-corvax-optio-inquisitor-description =
+    Includes a Marksman Carbine, 2 7.62 magazines,
     a .45 Colt pistol, 2 .45 magazines, a rope belt,
     a ceremonial sword, a bola, handcuffs,
     2 healing powder, 2 K rations, and a ceramic flask.

@@ -1892,8 +1892,8 @@
 
 
 - type: latheRecipe
-  id: N14BPLegionArmorOratorArmor
-  result: N14ClothingOuterLegionnaireOratorArmor
+  id: N14BPLegionArmorOptioArmor
+  result: N14ClothingOuterLegionnaireOptioArmor
   category: N14BlueprintLegionArmorT3
   completetime: 12
   requiresBlueprint: true
