@@ -6724,3 +6724,41 @@ Entries:
   id: 6043
   time: '2026-06-11T00:37:45.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/732
+- author: Bradysgaming
+  changes:
+    - type: Add
+      message: >-
+        Added chained boots for prisoners. (60% speed debuff and takes 1 minute
+        to unequip.) (still needs sprites so pretend for now) (craftable for
+        NCR)
+  id: 6044
+  time: '2026-06-11T01:22:43.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/743
+- author: Oli
+  changes:
+    - type: Add
+      message: Slouch Hat Added to NCR + Rangers Loadouts
+  id: 6045
+  time: '2026-06-11T01:23:13.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/744
+- author: Cythisiax
+  changes:
+    - type: Add
+      message: Added 80s faction to /raid request system
+    - type: Add
+      message: Added admin ID card with AllAccess tag
+    - type: Add
+      message: Added 3x hunger drain rate for Super Mutants
+    - type: Fix
+      message: Ghosts can no longer declare or receive war declarations
+    - type: Fix
+      message: CaesarLegionRecruit access level now properly applies to trysettag
+    - type: Fix
+      message: >-
+        Super Mutant melee damage now uses proper log scaling instead of flat 2x
+        multiplier (capped at 200f)
+    - type: Tweak
+      message: Removed redundant SuperMutantMeleeSystem (already handled by OniSystem)
+  id: 6046
+  time: '2026-06-11T01:32:51.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/746
