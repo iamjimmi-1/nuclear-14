@@ -38,6 +38,16 @@ public sealed class PowerArmorIntegritySystem : EntitySystem
     // #Misfits Fix - Tracks last processed hit to prevent Shitmed body system double-dip.
     private (GameTick tick, EntityUid uid) _lastProcessed;
 
+    // #Misfits Fix - Biological/internal damage types that bypass armor integrity entirely.
+    private static readonly HashSet<string> BypassTypes = new()
+    {
+        "Asphyxiation",
+        "Bloodloss",
+        "Cellular",
+        "Poison",
+        "Radiation",
+    };
+
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -145,8 +155,8 @@ public sealed class PowerArmorIntegritySystem : EntitySystem
             var brokenShare = new DamageSpecifier();
             foreach (var (type, amount) in args.Args.Damage.DamageDict)
             {
-                // #Misfits Fix - Radiation bypasses armor entirely; only affects the wearer.
-                if (type == "Radiation")
+                // #Misfits Fix - Biological damage bypasses armor entirely.
+                if (BypassTypes.Contains(type))
                 {
                     brokenShare.DamageDict[type] = amount;
                     continue;
@@ -183,8 +193,8 @@ public sealed class PowerArmorIntegritySystem : EntitySystem
                 continue;
             }
 
-            // #Misfits Fix - Radiation bypasses armor integrity entirely; only affects the wearer.
-            if (type == "Radiation")
+            // #Misfits Fix - Biological damage bypasses armor integrity entirely.
+            if (BypassTypes.Contains(type))
             {
                 playerShare.DamageDict[type] = amount;
                 continue;
