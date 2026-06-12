@@ -6833,3 +6833,12 @@ Entries:
   id: 6053
   time: '2026-06-12T18:08:56.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/770
+- author: Cythisiax
+  changes:
+    - type: Fix
+      message: >-
+        Bloodloss, Radiation, and other biological damage no longer drain power
+        armor integrity. They only affect the wearer.
+  id: 6054
+  time: '2026-06-12T18:11:19.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/763
