@@ -599,6 +599,26 @@
 
 
 - type: loadout
+  id: N14LoadoutOuterPressArmor
+  category: Outer
+  cost: 8
+  requirements:
+    - !type:CharacterItemGroupRequirement
+      group: N14LoadoutOuter
+    - !type:CharacterDepartmentRequirement
+      inverted: true
+      departments:
+      - Vault
+    - !type:CharacterJobRequirement 
+      inverted: true
+      jobs:
+      - BoSMidSerf
+      - CaesarLegionSlave
+      - NCRPrisoner
+  items:
+    - N14ClothingOuterPressArmor
+
+- type: loadout
   id: N14LoadoutOuterCombatArmor
   category: Outer
   cost: 13
