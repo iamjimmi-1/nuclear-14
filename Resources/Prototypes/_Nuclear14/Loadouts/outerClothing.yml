@@ -451,7 +451,7 @@
 
 
 - type: loadout
- id: N14LoadoutOuterScavengerHeavyArmor
+  id: N14LoadoutOuterScavengerHeavyArmor
   category: Outer
   cost: 6
   requirements:
