@@ -6960,3 +6960,20 @@ Entries:
   id: 6064
   time: '2026-06-14T03:57:45.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/790
+- author: Bradysgaming
+  changes:
+    - type: Tweak
+      message: Buffed all deathclaws
+    - type: Tweak
+      message: Buffed Mirelurks
+    - type: Tweak
+      message: Buffed Maypoles
+    - type: Tweak
+      message: Most wasteland wildlife will now fight back
+    - type: Tweak
+      message: >-
+        Buffed Xeno npcs to reflect to our damage (idk if they get used for an
+        event they wont suck ig)
+  id: 6065
+  time: '2026-06-14T04:02:32.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/796
