@@ -1,4 +1,6 @@
+using Content.Shared._Misfits.Movement;
 using Robust.Client.Timing;
+using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
 namespace Content.Client._Misfits.Movement;
@@ -12,7 +14,7 @@ namespace Content.Client._Misfits.Movement;
 /// which are already sent as predictive events — no separate periodic message is needed,
 /// avoiding the "Got late MsgEntity" warning caused by tick-stamped entity events on a timer.
 /// </summary>
-public sealed class MisfitsLagCompensationSystem : EntitySystem
+public sealed class MisfitsLagCompensationSystem : SharedMisfitsLagCompensationSystem
 {
     [Dependency] private readonly IClientGameTiming _clientTiming = default!;
 
@@ -21,4 +23,9 @@ public sealed class MisfitsLagCompensationSystem : EntitySystem
     /// event that the server will use for lag-compensated range validation.
     /// </summary>
     public GameTick GetLastRealTick() => _clientTiming.LastRealTick;
+
+    public override GameTick GetLastRealTick(ICommonSession? session)
+    {
+        return _clientTiming.LastRealTick;
+    }
 }

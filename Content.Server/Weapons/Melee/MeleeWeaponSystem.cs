@@ -1,6 +1,6 @@
 using Content.Server.Chat.Systems;
 using Content.Server.CombatMode.Disarm;
-using Content.Server.Movement.Systems;
+using Content.Server._Misfits.Movement;
 using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared.Actions.Events;
 using Content.Shared.Administration.Components;
@@ -41,7 +41,7 @@ public sealed class MeleeWeaponSystem : SharedMeleeWeaponSystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly DamageExamineSystem _damageExamine = default!;
-    [Dependency] private readonly LagCompensationSystem _lag = default!;
+    [Dependency] private readonly ServerMisfitsLagCompensationSystem _lag = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
     [Dependency] private readonly ContestsSystem _contests = default!;
