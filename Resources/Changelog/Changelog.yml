@@ -7135,3 +7135,10 @@ Entries:
   id: 6077
   time: '2026-06-15T20:55:14.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/809
+- author: Vixting
+  changes:
+    - type: Add
+      message: Added predicton / lag compensation from RMC
+  id: 6078
+  time: '2026-06-15T22:29:50.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/814
