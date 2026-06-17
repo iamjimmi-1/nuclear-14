@@ -7247,3 +7247,12 @@ Entries:
   id: 6090
   time: '2026-06-17T01:32:38.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/831
+- author: Wazura
+  changes:
+    - type: Add
+      message: Added a few premium guns
+    - type: Tweak
+      message: Loadout Costs, again
+  id: 6091
+  time: '2026-06-17T02:03:08.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/829
