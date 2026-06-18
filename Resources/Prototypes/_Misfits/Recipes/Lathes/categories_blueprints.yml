@@ -339,3 +339,8 @@
   id: N14BlueprintC27CombatGeneric
   name: lathe-category-blueprint-c27-combat
 
+# === EIGHTIES MOTORBIKES ===
+- type: latheCategory
+  id: MisfitsBlueprintEightiesMotorbikes
+  name: lathe-category-blueprint-eighties-motorbikes
+
