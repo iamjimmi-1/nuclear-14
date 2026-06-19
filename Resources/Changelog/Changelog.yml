@@ -7469,3 +7469,14 @@ Entries:
   id: 6102
   time: '2026-06-19T00:28:37.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/842
+- author: paige404
+  changes:
+    - type: Add
+      message: >-
+        Added new sprites by Octin for the tribal Tree of Life and the Legion's
+        Tree of Mars
+    - type: Add
+      message: Added new tribe banners by sprited by Octin and Skellingtonio.
+  id: 6103
+  time: '2026-06-19T01:13:19.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/847
