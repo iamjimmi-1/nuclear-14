@@ -7533,3 +7533,12 @@ Entries:
   id: 6110
   time: '2026-06-19T20:22:19.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/853
+- author: RedBookcase
+  changes:
+    - type: Add
+      message: Combat Injectors can now be printed at workbenches.
+    - type: Fix
+      message: Fixed broken fill sprites on Antidote/Hydra injectors.
+  id: 6111
+  time: '2026-06-19T21:42:07.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/857
