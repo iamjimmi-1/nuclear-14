@@ -588,6 +588,10 @@
   - type: Hypospray
     solutionName: pen
     transferAmount: 20
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 20
   - type: Tag
     tags:
     - Syringe
