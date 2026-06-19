@@ -7505,3 +7505,12 @@ Entries:
   id: 6106
   time: '2026-06-19T16:48:30.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/854
+- author: Bradysgaming
+  changes:
+    - type: Tweak
+      message: Added ~3 hours of time req to all 80's roles
+    - type: Tweak
+      message: Nerfed bikes by 20%
+  id: 6107
+  time: '2026-06-19T16:49:31.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/855
