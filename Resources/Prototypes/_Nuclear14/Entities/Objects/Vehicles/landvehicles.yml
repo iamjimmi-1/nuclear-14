@@ -9,6 +9,10 @@
   - type: Damageable
     damageContainer: Inorganic
     damageModifierSet: Motorbike
+  - type: Repairable
+    fuelCost: 10
+    doAfterDelay: 15
+    qualityNeeded: Welding
   - type: Destructible
     thresholds: []
   - type: ExplosionResistance

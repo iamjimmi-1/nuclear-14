@@ -12,6 +12,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Movement.Components;
 using Content.Shared.Popups;
+using Content.Shared.Tools.Systems;
 using Content.Shared.Vehicles;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
@@ -32,6 +33,7 @@ public sealed class MotorbikeSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private readonly SharedToolSystem _tool = default!;
 
     public override void Initialize()
     {
@@ -103,6 +105,9 @@ public sealed class MotorbikeSystem : EntitySystem
     private void OnInteractUsing(Entity<MotorbikeComponent> ent, ref InteractUsingEvent args)
     {
         if (args.Handled || ent.Comp.Burning)
+            return;
+
+        if (IsWeldingTool(args.Used))
             return;
 
         if (!TryStartRefuelDoAfter(ent, args.Used, args.User))
@@ -307,6 +312,11 @@ public sealed class MotorbikeSystem : EntitySystem
     {
         return _solution.TryGetSolution(uid, motorbike.FuelSolution, out _, out var fuelSolution) &&
             fuelSolution.GetTotalPrototypeQuantity(motorbike.FuelReagent) > FixedPoint2.Zero;
+    }
+
+    private bool IsWeldingTool(EntityUid uid)
+    {
+        return _tool.HasQuality(uid, "Welding");
     }
 
     private void StopEngine(EntityUid uid, VehicleComponent vehicle, bool popup = false)
