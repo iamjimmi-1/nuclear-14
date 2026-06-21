@@ -54,7 +54,7 @@ namespace Content.Client.Administration.Systems
             if (_admin.HasAdminFlag(args.User, AdminFlags.Fun))
                 args.ExtraCategories.Add(VerbCategory.Smite);
 
-            if (_admin.HasAdminFlag(args.User, AdminFlags.Admin))
+            if (_admin.HasAdminFlag(args.User, AdminFlags.Admin | AdminFlags.Fun))
                 args.ExtraCategories.Add(VerbCategory.Tricks);
         }
     }

@@ -63,10 +63,10 @@ public sealed partial class AdminVerbSystem
 
         var player = actor.PlayerSession;
 
-        if (!_adminManager.HasAdminFlag(player, AdminFlags.Admin))
+        if (!_adminManager.HasAdminFlag(player, AdminFlags.Admin | AdminFlags.Fun))
             return;
 
-        if (_adminManager.HasAdminFlag(player, AdminFlags.Admin))
+        if (_adminManager.HasAdminFlag(player, AdminFlags.Admin | AdminFlags.Fun))
         {
             if (TryComp<DoorBoltComponent>(args.Target, out var bolts))
             {
