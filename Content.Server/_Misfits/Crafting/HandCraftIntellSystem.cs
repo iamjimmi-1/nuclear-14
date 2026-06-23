@@ -37,7 +37,7 @@ public sealed class HandCraftIntellSystem : EntitySystem
         if (!_proto.TryIndex<LatheRecipePrototype>(msg.RecipeId, out var recipe))
             return;
 
-        if (!_proto.TryIndex<HandCraftIntellRecipe>(msg.RecipeId, out var craftData))
+        if (!_proto.TryIndex<HandCraftIntellRecipePrototype>(msg.RecipeId, out var craftData))
             return;
 
         if (_special.GetEffective(player.Value, SpecialStat.Intelligence) < craftData.MinInt)

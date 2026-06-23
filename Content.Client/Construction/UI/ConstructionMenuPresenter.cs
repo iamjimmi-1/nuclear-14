@@ -258,7 +258,7 @@ namespace Content.Client.Construction.UI
             var clientMaterials = CollectClientMaterials(player.Value);
             var spriteSys = _systemManager.GetEntitySystem<SpriteSystem>();
 
-            foreach (var craftData in _prototypeManager.EnumeratePrototypes<HandCraftIntellRecipe>())
+            foreach (var craftData in _prototypeManager.EnumeratePrototypes<HandCraftIntellRecipePrototype>())
             {
                 if (playerInt < craftData.MinInt)
                     continue;
@@ -441,7 +441,7 @@ namespace Content.Client.Construction.UI
 
             var workbenchItems = new List<(string name, ItemList.Item item)>();
 
-            foreach (var craftData in _prototypeManager.EnumeratePrototypes<HandCraftIntellRecipe>())
+            foreach (var craftData in _prototypeManager.EnumeratePrototypes<HandCraftIntellRecipePrototype>())
             {
                 if (playerInt < craftData.MinInt)
                     continue;
@@ -512,7 +512,7 @@ namespace Content.Client.Construction.UI
 
             var stepList = _constructionView.RecipeStepList;
 
-            if (_prototypeManager.TryIndex<HandCraftIntellRecipe>(recipe.ID, out var craftData))
+            if (_prototypeManager.TryIndex<HandCraftIntellRecipePrototype>(recipe.ID, out var craftData))
                 stepList.AddItem($"Requires INT {craftData.MinInt}", Texture.Transparent, false);
 
             foreach (var (mat, amount) in recipe.Materials)
