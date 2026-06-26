@@ -266,7 +266,7 @@ undecided-loadout-category-corvax-centurion-marksman-description =
 undecided-loadout-category-corvax-centurion-vanquisher-name = Centurion Vanquisher
 undecided-loadout-category-corvax-centurion-vanquisher-description =
     Includes a Thermic Lance, a rope belt, an Assault Carbine, 4 mags of 5.56,
-    2 healing pooultice, 2 K rations, and a ceramic flask.
+    2 healing poultice, 2 K rations, and a ceramic flask.
 
 # #Misfits Add - Centurion armor selection kit locale strings (for LegionCenturionArmorloadoutkits)
 undecided-loadout-category-misfits-centurion-armor-standard-name = Centurion Armor: Standard
