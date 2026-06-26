@@ -84,7 +84,7 @@
   id: BoSInitiateGear
   equipment:
     jumpsuit: N14ClothingUniformJumpskirtBOSBlack
-    back: N14ClothingBackpackMilitary
+    back: MisfitsClothingBackpackSquire # #Misfits Add - Squire Bag starting back item
     shoes: N14ClothingBootsLeatherFilled
     pocket1: BoSBrotherhoodInitiateKits
     id: N14IDBrotherhoodOfSteelHolotagInitiate
