@@ -53,6 +53,82 @@
     - id: N14Bandage
       maxAmount: 2
 
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BaseMail
+  id: MailVaultWrappingPaper
+  suffix: vault-wrapping-paper
+  components:
+  - type: Mail
+    contents:
+    - id: PresentTrash
+      maxAmount: 3
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BaseMail
+  id: MailVaultScarf
+  suffix: vault-scarf
+  components:
+  - type: Mail
+    contents:
+    - id: ClothingNeckScarfStripedRed
+      prob: 0.14
+      orGroup: scarf
+    - id: ClothingNeckScarfStripedBlue
+      prob: 0.14
+      orGroup: scarf
+    - id: ClothingNeckScarfStripedGreen
+      prob: 0.14
+      orGroup: scarf
+    - id: ClothingNeckScarfStripedOrange
+      prob: 0.14
+      orGroup: scarf
+    - id: ClothingNeckScarfStripedPurple
+      prob: 0.14
+      orGroup: scarf
+    - id: ClothingNeckScarfStripedLightBlue
+      prob: 0.14
+      orGroup: scarf
+    - id: ClothingNeckScarfStripedBlack
+      prob: 0.14
+      orGroup: scarf
+    - id: ClothingNeckScarfStripedBrown
+      prob: 0.14
+      orGroup: scarf
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BaseMail
+  id: MailVaultVodka
+  suffix: vault-vodka
+  components:
+  - type: Mail
+    contents:
+    - id: DrinkVodkaBottleFull
+    - id: DrinkShotGlass
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BaseMail
+  id: MailVaultWine
+  suffix: vault-wine
+  components:
+  - type: Mail
+    contents:
+    - id: DrinkWineBottleFull
+    - id: DrinkWineGlass
+
+- type: entity
+  categories: [ HideSpawnMenu ]
+  parent: BaseMail
+  id: MailVaultBirthdayCake
+  suffix: vault-birthday-cake
+  components:
+  - type: Mail
+    contents:
+    - id: FoodCakeBirthday
+
 
 # doc
 

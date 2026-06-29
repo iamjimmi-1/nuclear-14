@@ -3,11 +3,16 @@
   everyone:
     MailVaultPlushie: 0.5
     MailVaultMedSupply: 0.8
+    MailVaultWrappingPaper: 0.4
+    MailVaultScarf: 0.5
+    MailVaultVodka: 0.4
+    MailVaultWine: 0.4
+    MailVaultBirthdayCake: 0.3
 
   jobs:
     VaultDoctor:
-      MailVaultDoctorSupplies: 2.0
-      MailVaultDoctorRadAway: 0.2
+      MailVaultDoctorSupplies: 1.0
+      MailVaultDoctorRadAway: 0.5
       MailVaultDoctorSurgicalSupplies: 1.0
       MailVaultDoctorStims: 1.0
       MailVaultDoctorCombatMedkit: 1.0
@@ -16,7 +21,7 @@
       MailVaultPills: 1.0
       MailVaultDoctorUltraStimpak: 0.5
       MailVaultDoctorControlled: 0.5
-      MailVaultDoctorParamedicOutfit: 0.4
+      MailVaultDoctorParamedicOutfit: 0.5
       MailVaultDoctorGrenadeKit: 1.0
     VaultEngineer:
       MailVaultEngineerCircuitry: 1.5
