@@ -8080,3 +8080,14 @@ Entries:
   id: 6157
   time: '2026-06-29T00:15:00.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/921
+- author: paige404
+  changes:
+    - type: Remove
+      message: Removed the Yuma, an out-of-place holdover from Corvax/N14.
+    - type: Add
+      message: >-
+        Added the Willowers, our own Misfits-specific Utah tribe. You may find
+        them very familiar.
+  id: 6158
+  time: '2026-06-29T00:21:40.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/920
