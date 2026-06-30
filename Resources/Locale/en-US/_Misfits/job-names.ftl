@@ -45,7 +45,13 @@ job-description-enclave-head-scientist = Direct the Enclave's research programs,
 job-name-enclave-scientist = Enclave Scientist
 job-description-enclave-scientist = Conduct field research, maintain advanced equipment, and support the cell's scientific mission.
 job-name-enclave-junior-scientist = Enclave Junior Scientist
-job-description-enclave-junior-scientist = Assist senior scientists, learn Enclave protocols, and contribute to ongoing research.# Synthetics job names and descriptions (Misfits-specific)
+job-description-enclave-junior-scientist = Assist senior scientists, learn Enclave protocols, and contribute to ongoing research.
+
+# #Misfits Add - EnclaveRecruit: hidden job for per-round recruitment tracking.
+job-name-enclave-recruit = Enclave Recruit
+job-description-enclave-recruit = Per-round Enclave recruit. Playtime here counts toward Enclave department timers.
+
+# Synthetics job names and descriptions (Misfits-specific)
 
 # Synthetics
 # #Misfits Add - Chief Ranger: admin-only Rangers leadership role.
@@ -105,6 +111,9 @@ job-description-c27-ncr = You are a C-27 humanoid robot conscripted into the New
 job-name-c27-bos = C-27 Brotherhood Humanoid Robot
 job-description-c27-bos = You are a C-27 humanoid robot reclaimed by the Brotherhood of Steel — repainted in Brotherhood livery and issued a Brotherhood headset, Initiate holotag, and a light Brotherhood-pattern armor kit. Slow but durable, immune to flash and broken glass, and self-repairing. Serve the Codex.
 
+job-name-c27-zax = C-27 Z.A.X Humanoid Robot
+job-description-c27-zax = You are a C-27 humanoid robot rebuilt as a Z.A.X-linked chassis. Fast, fragile, and aggressively self-maintaining, you regenerate most damage rapidly but remain highly vulnerable to electrical disruption and EMP shock.
+
 # #Misfits Add - Followers of the Apocalypse ranked job locale.
 job-name-follower-head = Followers Head
 job-description-follower-head = You lead this chapter of the Followers. The sick, the curious, and the desperate look to you for direction. Set the example, protect your people, and keep the mission alive.
@@ -161,3 +170,10 @@ undecided-loadout-category-misfits-pal-wattz-description =
 # Tribal Robot
 job-name-synthetic-protectron-tribal = Protectron Spirit-Tender
 job-description-synthetic-protectron-tribal = An agricultural robot that has been adopted by the local tribe and modified over decades or centuries.
+
+# Legion Acolyte of Mars
+job-name-caesar-legion-Acolyte-of-mars = Acolyte of Mars
+job-description-caesar-legion-Acolyte-of-mars = You are a devoted Acolyte of Mars, you answer to the Priestess directly.
+
+job-name-bos-off-duty = Off Duty BOS
+job-description-bos-off-duty = You are an off-duty member of the Brotherhood of Steel. You are not expected to participate in combat operations, you are not to enter the bunker unless in danger either.

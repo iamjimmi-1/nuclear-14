@@ -94,7 +94,13 @@ public sealed class FactionWarSystem : EntitySystem
     {
         "NCRPrisoner",
         "CaesarLegionSlave",
-        "CaesarLegionFrumentarii"
+        "CaesarLegionFrumentarii",
+        "CaesarLegionCitizen",
+        "CaesarLegionTrader",
+        "NCRCitizen",
+        "NCRTrader",
+        "Townsperson",
+        "BoSOffDuty",
     };
 
     /// <summary>Major factions — each can only be in ONE war at a time.</summary>
