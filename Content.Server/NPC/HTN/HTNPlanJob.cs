@@ -35,7 +35,11 @@ public sealed class HTNPlanJob : Job<HTNPlan>
         _blackboard = blackboard;
         _branchTraversal = branchTraversal;
     }
-
+    /// <summary>
+    /// THIS IS WHERE PLANNING TAKES PLACE
+    /// TODO:
+    /// </summary>
+    /// <returns></returns>
     protected override async Task<HTNPlan?> Process()
     {
         /*
@@ -69,13 +73,14 @@ public sealed class HTNPlanJob : Job<HTNPlan>
             {
                 case HTNCompoundTask compound:
                     await SuspendIfOutOfTime();
-
+                    /// look thrugh compound's branches and decomp first valid branch's tasks
                     if (TryFindSatisfiedMethod(compound, tasksToProcess, _blackboard, ref btrIndex))
                     {
                         // Need to copy worldstate to roll it back
                         // Don't need to copy taskstoprocess as we can just clear it and set it to the compound task we roll back to.
                         // Don't need to copy finalplan as we can just count how many primitives we've added since last record
 
+                        // each method or branch has associated num of primitives
                         decompHistory.Push(new DecompositionState()
                         {
                             Blackboard = _blackboard.ShallowClone(),
@@ -84,7 +89,7 @@ public sealed class HTNPlanJob : Job<HTNPlan>
                             PrimitiveCount = primitiveCount,
                         });
 
-                        // TODO: Early out if existing plan is better and save lots of time.
+                        // TODO: Early out if existing plan is better and save lots of time
                         // my brain is not working rn AAA
 
                         primitiveCount = 0;
@@ -125,6 +130,8 @@ public sealed class HTNPlanJob : Job<HTNPlan>
     {
         blackboard.ReadOnly = true;
 
+        /// if one primitive is invalid, we gotta cancel its tasks and goto next branch
+        ///
         foreach (var con in primitive.Preconditions)
         {
             if (con.IsMet(blackboard))
@@ -132,7 +139,7 @@ public sealed class HTNPlanJob : Job<HTNPlan>
 
             return false;
         }
-
+        /// making this a tuple with a "valid" bool seems redundant if we got precons
         var (valid, effects) = await primitive.Operator.Plan(blackboard, Cancellation);
 
         if (!valid)
@@ -156,15 +163,20 @@ public sealed class HTNPlanJob : Job<HTNPlan>
     /// <summary>
     /// Goes through each compound task branch and tries to find an appropriate one.
     /// </summary>
+    /// TODO: Maybe fix this up and have early exit due to current MTR cost
+    /// TODO: Method = branch
+    /// compound just holds branchs
     private bool TryFindSatisfiedMethod(HTNCompoundTask compoundId, Queue<HTNTask> tasksToProcess, NPCBlackboard blackboard, ref int mtrIndex)
     {
         var compound = _protoManager.Index<HTNCompoundPrototype>(compoundId.Task);
-
+        /// MTR to skip branches, check each branch in compound
         for (var i = mtrIndex; i < compound.Branches.Count; i++)
         {
+
             var branch = compound.Branches[i];
             var isValid = true;
 
+            /// check each precon in branch
             foreach (var con in branch.Preconditions)
             {
                 if (con.IsMet(blackboard))
@@ -176,12 +188,12 @@ public sealed class HTNPlanJob : Job<HTNPlan>
 
             if (!isValid)
                 continue;
-
+            /// decomp tasks in 1st accepted branch
             foreach (var task in branch.Tasks)
             {
                 tasksToProcess.Enqueue(task);
             }
-
+            /// first valid branch only
             return true;
         }
 
@@ -212,7 +224,8 @@ public sealed class HTNPlanJob : Job<HTNPlan>
         var count = finalPlan.Count;
         var reduction = count - primitiveCount;
 
-        // Final plan only has primitive tasks added to it so we can just remove the count we've tracked since the last decomp.
+        // Final plan only has primitive tasks added to it
+        // so we can just remove the count we've tracked since the last decomp.
         finalPlan.RemoveRange(reduction, primitiveCount);
         appliedStates.RemoveRange(reduction, primitiveCount);
 

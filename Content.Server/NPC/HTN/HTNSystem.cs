@@ -1,5 +1,3 @@
-using System.Linq;
-using System.Text;
 using System.Threading;
 using Content.Server.Administration.Managers;
 using Robust.Shared.CPUJob.JobQueues;
@@ -7,7 +5,6 @@ using Robust.Shared.CPUJob.JobQueues.Queues;
 using Content.Server.NPC.HTN.PrimitiveTasks;
 using Content.Server.NPC.Systems;
 using Content.Shared._Misfits.CCVar; // #Misfits Add - CVar gate for ReplanRate
-using Content.Shared.Administration;
 using Content.Shared.Mobs;
 using Content.Shared.NPC;
 using JetBrains.Annotations;
@@ -20,11 +17,16 @@ using Robust.Shared.Utility;
 using Content.Server.Worldgen; // Corvax
 using Content.Server.Worldgen.Components; // Corvax
 using Content.Server.Worldgen.Systems; // Corvax
-using Robust.Server.GameObjects; // Corvax
 
 namespace Content.Server.NPC.HTN;
-
-public sealed class HTNSystem : EntitySystem
+/// <summary>
+///
+/// HTN: Hierarchical Task Network
+/// System that handles the AI of NPCs every tick
+/// ticked/updated by <see cref="NPCSystem"/>
+///
+/// </summary>
+public sealed partial class HTNSystem : EntitySystem
 {
     [Dependency] private readonly IAdminManager _admin = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!; // #Misfits Add - CVar gate for ReplanRate
@@ -48,7 +50,7 @@ public sealed class HTNSystem : EntitySystem
     // can tune without a rebuild. At 150+ pop on constrained VPS hardware the extra 2 Hz of
     // HTN work across every active NPC was measurable; 5 Hz is the safer baseline.
     private float _replanRate = 5f; // per second, CVar-driven
-    private float Accumulator; // limit replanning rate
+    private float _accumulator; // limit replanning rate
 
     // Hierarchical Task Network
     public override void Initialize()
@@ -63,37 +65,51 @@ public sealed class HTNSystem : EntitySystem
         SubscribeLocalEvent<HTNComponent, PlayerAttachedEvent>(_npc.OnPlayerNPCAttach);
         SubscribeLocalEvent<HTNComponent, PlayerDetachedEvent>(_npc.OnPlayerNPCDetach);
         SubscribeLocalEvent<HTNComponent, ComponentShutdown>(OnHTNShutdown);
-        SubscribeNetworkEvent<RequestHTNMessage>(OnHTNMessage);
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypeLoad);
+        DebugInit();
         OnLoad();
     }
-
-    private void OnHTNMessage(RequestHTNMessage msg, EntitySessionEventArgs args)
+    [PublicAPI]
+    public void Replan(HTNComponent component)
     {
-        if (!_admin.HasAdminFlag(args.SenderSession, AdminFlags.Debug))
-        {
-            _subscribers.Remove(args.SenderSession);
-            return;
-        }
-
-        if (_subscribers.Add(args.SenderSession))
-            return;
-
-        _subscribers.Remove(args.SenderSession);
+        component.NextPlanTime = _gameTiming.CurTime;
     }
 
+
+
+    /// <summary>
+    /// (Re)Initialization of HTN system parts TODO: better summary
+    ///
+    /// NPCs with HTNComp are forced reset and queued new jobs
+    /// Also where all NPCs are initially given planningJobs
+    /// and where HTN primitives and compounds are loaded and
+    /// operators injected
+    /// </summary>
     private void OnLoad()
     {
         // Clear all NPCs in case they're hanging onto stale tasks
         var query = AllEntityQuery<HTNComponent>();
 
+        // NOTE TO SELF: why cant we just shut down/wipe every plan and task
+        //               in fewer lines and why we need the current operator
+        //               HERE from outside to do so?
+        // honestly I would prefer just, ForceShutdownAll
+        // also wouldnt shutting down the current task ruin what we have planned to execute?
+        // Maybe it is referring to just what the planner has done if it has
+        // planner and executor work in parralel or at least async?
+        // isn't that a bit wasteful? Like if the current tasks are fine we dont need to replan
+
+        // nvm ^^ I didnt consider we got a bunch of AI in prolly diff states but maybe this still could be done
+        // more gracefully?? I dunno will check later
         while (query.MoveNext(out var comp))
         {
             comp.PlanningToken?.Cancel();
             comp.PlanningToken = null;
 
+            // I guess logic here is that a null plan will already be replanned
             if (comp.Plan != null)
             {
+
                 var currentOperator = comp.Plan.CurrentOperator;
                 ShutdownTask(currentOperator, comp.Blackboard, HTNOperatorStatus.Failed);
                 ShutdownPlan(comp);
@@ -160,31 +176,32 @@ public sealed class HTNSystem : EntitySystem
         component.PlanningJob = null;
     }
 
-    /// <summary>
-    /// Forces the NPC to replan.
-    /// </summary>
-    [PublicAPI]
-    public void Replan(HTNComponent component)
-    {
-        component.NextPlanTime = _gameTiming.CurTime;
-    }
 
+    /// <summary>
+    /// Starts all planning, handling only new completed plans on active NPCs
+    /// decides if new plans should replace old plan of an NPC
+    /// Called by NPCsystem every tick
+    /// </summary>
+    /// <param name="count"> number of NPCs updated so far </param>
+    /// <param name="maxUpdates"> max NPCs to update </param>
     public void UpdateNPC(ref int count, int maxUpdates, float frameTime)
     {
+        /// handles and runs each NPC planner
+        ///
         _planQueue.Process();
 
         // Limit update rate
         // #Misfits Tweak - Was `const float updatePeriod = 1/ReplanRate;` when ReplanRate
         // was a const. Now computed per-call from the CVar-driven field.
         var updatePeriod = 1f / _replanRate;
-        Accumulator += frameTime;
-        if (Accumulator < updatePeriod)
+        _accumulator += frameTime;
+        if (_accumulator < updatePeriod)
             return;
-        Accumulator -= updatePeriod;
+        _accumulator -= updatePeriod;
 
         var query = EntityQueryEnumerator<ActiveNPCComponent, HTNComponent>();
 
-        while(query.MoveNext(out var uid, out _, out var comp))
+        while (query.MoveNext(out var uid, out _, out var comp))
         {
             // If we're over our max count or it's not MapInit then ignore the NPC.
             if (count >= maxUpdates)
@@ -210,6 +227,7 @@ public sealed class HTNSystem : EntitySystem
 
                 var newPlanBetter = false;
 
+                /// TODO: MTR DONE HERE!!! MAKE OWN METHOD! Check if this can be done betterer
                 // If old traversal is better than new traversal then ignore the new plan
                 if (comp.Plan != null && comp.PlanningJob.Result != null)
                 {
@@ -225,7 +243,7 @@ public sealed class HTNSystem : EntitySystem
                         }
                     }
                 }
-
+                /// TODO:  MAKE OWN METHOD!
                 if (comp.Plan == null || newPlanBetter)
                 {
                     comp.CheckServices = false;
@@ -249,7 +267,8 @@ public sealed class HTNSystem : EntitySystem
                 {
                     comp.CheckServices = true;
                 }
-
+                /// get rid of completed planned job
+                /// because we are sticking with currently executing plan
                 comp.PlanningJob = null;
                 comp.PlanningToken = null;
             }
@@ -258,7 +277,7 @@ public sealed class HTNSystem : EntitySystem
             count++;
         }
     }
-// Corvax-start
+    // Corvax-start
     private bool IsNPCActive(EntityUid entity)
     {
         var transform = Transform(entity);
@@ -270,85 +289,17 @@ public sealed class HTNSystem : EntitySystem
 
         return _loadedQuery.TryGetComponent(chunk, out var loaded) && loaded.Loaders is not null;
     }
-// Corvax-end
+    // Corvax-end
 
-    private void HTNDebug(HTNComponent comp)
-    {
-        // Send debug info
-        foreach (var session in _subscribers)
-        {
-            var text = new StringBuilder();
-
-            if (comp.Plan != null)
-            {
-                text.AppendLine($"BTR: {string.Join(", ", comp.Plan.BranchTraversalRecord)}");
-                text.AppendLine($"tasks:");
-                var root = comp.RootTask;
-                var btr = new List<int>();
-                var level = -1;
-                AppendDebugText(root, text, comp.Plan.BranchTraversalRecord, btr, ref level, comp.Plan);
-            }
-
-            RaiseNetworkEvent(new HTNMessage()
-            {
-                Uid = GetNetEntity(comp.Owner),
-                Text = text.ToString(),
-            }, session.Channel);
-        }
-    }
-
-    private void AppendDebugText(HTNTask task, StringBuilder text, List<int> planBtr, List<int> btr, ref int level, HTNPlan plan)
-    {
-        // If it's the selected BTR then highlight.
-        for (var i = 0; i < btr.Count; i++)
-        {
-            text.Append("--");
-        }
-
-        text.Append(' ');
-
-        if (task is HTNPrimitiveTask primitive)
-        {
-            // Highlight current task
-            if (plan.CurrentTask == primitive && btr.SequenceEqual(plan.BranchTraversalRecord))
-            {
-                // Still results in false positive if current branch contains multiple of the same task...
-                text.Append("> ");
-            }
-            text.AppendLine(primitive.ToString());
-            return;
-        }
-
-        if (task is HTNCompoundTask compTask)
-        {
-            var compound = _prototypeManager.Index<HTNCompoundPrototype>(compTask.Task);
-            level++;
-            text.AppendLine(compound.ID);
-            var branches = compound.Branches;
-
-            for (var i = 0; i < branches.Count; i++)
-            {
-                var branch = branches[i];
-                btr.Add(i);
-
-                foreach (var sub in branch.Tasks)
-                {
-                    AppendDebugText(sub, text, planBtr, btr, ref level, plan);
-                }
-
-                btr.RemoveAt(btr.Count - 1);
-            }
-
-            level--;
-            return;
-        }
-
-        throw new NotImplementedException();
-    }
-
+    /// <summary>
+    ///
+    /// </summary>
+    /// <param name="component">HTN comp with all info needed for NPC TODO: (answer why too)</param>
+    /// <exception cref="InvalidOperationException"></exception>
     private void Update(HTNComponent component, float frameTime)
     {
         // We'll still try re-planning occasionally even when we're updating in case new data comes in.
+        /// what? ^^
         if (component.NextPlanTime <= _gameTiming.CurTime)
         {
             RequestPlan(component);
@@ -414,6 +365,15 @@ public sealed class HTNSystem : EntitySystem
         HTNDebug(component);
     }
 
+    // TODO: probably have a FORCED shutdown and also why is conditional shutdown literally
+    // TODO: a secondary shutdown that runs with default one???
+    /// <summary>
+    ///  So this is shutting down the running task/current popped off stack
+    /// task
+    /// </summary>
+    /// <param name="currentOperator">coded operation </param>
+    /// <param name="blackboard"></param>
+    /// <param name="status"></param>
     public void ShutdownTask(HTNOperator currentOperator, NPCBlackboard blackboard, HTNOperatorStatus status)
     {
         if (currentOperator is IHtnConditionalShutdown conditional &&
@@ -424,7 +384,14 @@ public sealed class HTNSystem : EntitySystem
 
         currentOperator.TaskShutdown(blackboard, status);
     }
-
+    /// <summary>
+    /// so THIS is shutting down all the other tasks in the stack(not ran/pop'd yet)
+    /// WHY do we need to shutdown these?? They are not running yet, can't we
+    /// do just Plan = null???
+    /// Maybe reversing side effects?? but cant we just keep side effect from current task?
+    /// also why do we run both conditional and plan shutdown no matter what???
+    /// </summary>
+    /// <param name="component"></param>
     public void ShutdownPlan(HTNComponent component)
     {
         DebugTools.Assert(component.Plan != null);
@@ -446,6 +413,8 @@ public sealed class HTNSystem : EntitySystem
 
     /// <summary>
     /// Shuts down the current operator conditionally.
+    /// different from other ones named the same. Used in regular update loop where we don't
+    /// know immeditly if branch/task has a condition
     /// </summary>
     private void ConditionalShutdown(HTNPlan plan, HTNOperator currentOperator, NPCBlackboard blackboard, HTNPlanState state)
     {
@@ -461,10 +430,15 @@ public sealed class HTNSystem : EntitySystem
     /// <summary>
     /// Starts a new primitive task. Will apply effects from planning if applicable.
     /// </summary>
+    /// TODO: Check what we actually need from startUp and if we need "planning only startup side effects" like this
+    /// ie. why cant we just have this check in a branch's conditional? Why cant we have the side effect just carry
+    /// over from previous tasks or just be informed by world state like normal?
     private void StartupTask(HTNPrimitiveTask primitive, NPCBlackboard blackboard, Dictionary<string, object>? effects)
     {
         // We may have planner only tasks where we want to reuse their data during update
         // e.g. if we pathfind to an enemy to know if we can attack it, we don't want to do another pathfind immediately
+        /// Past me: So why not just have a higher priority branch for that????^^^^
+        ///         why offload that work to startup???
         if (effects != null && primitive.ApplyEffectsOnStartup)
         {
             foreach (var (key, value) in effects)
@@ -478,17 +452,25 @@ public sealed class HTNSystem : EntitySystem
 
     /// <summary>
     /// Request a new plan for this component, even if running an existing plan.
+    ///
+    /// instatiates HTNPlanJob and adds to planQueue
     /// </summary>
     /// <param name="component"></param>
+    ///
+    /// "Even if running an existing plan"
+    /// yes so we will have a JobPlan running even while we are still
+    /// executing tasks
+    /// TODO: rename to something less misleading
     private void RequestPlan(HTNComponent component)
     {
+        /// already planning so dont
         if (component.PlanningJob != null)
             return;
 
         component.NextPlanTime = _gameTiming.CurTime + TimeSpan.FromSeconds(component.PlanCooldown);
         var cancelToken = new CancellationTokenSource();
         var branchTraversal = component.Plan?.BranchTraversalRecord;
-
+        ///
         var job = new HTNPlanJob(
             0.02,
             _prototypeManager,
@@ -500,46 +482,7 @@ public sealed class HTNSystem : EntitySystem
         component.PlanningToken = cancelToken;
     }
 
-    public string GetDomain(HTNCompoundTask compound)
-    {
-        // TODO: Recursively add each one
-        var indent = 0;
-        var builder = new StringBuilder();
-        AppendDomain(builder, compound, ref indent);
 
-        return builder.ToString();
-    }
-
-    private void AppendDomain(StringBuilder builder, HTNTask task, ref int indent)
-    {
-        var buffer = string.Concat(Enumerable.Repeat("    ", indent));
-
-        if (task is HTNPrimitiveTask primitive)
-        {
-            builder.AppendLine(buffer + $"Primitive: {task}");
-            builder.AppendLine(buffer + $"  operator: {primitive.Operator.GetType().Name}");
-        }
-        else if (task is HTNCompoundTask compTask)
-        {
-            var compound = _prototypeManager.Index<HTNCompoundPrototype>(compTask.Task);
-            builder.AppendLine(buffer + $"Compound: {task}");
-
-            for (var i = 0; i < compound.Branches.Count; i++)
-            {
-                var branch = compound.Branches[i];
-
-                builder.AppendLine(buffer + "  branch:");
-                indent++;
-
-                foreach (var branchTask in branch.Tasks)
-                {
-                    AppendDomain(builder, branchTask, ref indent);
-                }
-
-                indent--;
-            }
-        }
-    }
 }
 
 /// <summary>
