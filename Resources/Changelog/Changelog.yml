@@ -8415,3 +8415,20 @@ Entries:
   id: 6179
   time: '2026-07-03T00:28:43.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/955
+- author: Jerryaqua
+  changes:
+    - type: Remove
+      message: The AER-9A is dead, Long live the AER-9A
+    - type: Tweak
+      message: >-
+        The RCW has been reworked to fill a similar role, as well as electron
+        charge pack size buff. 
+    - type: Tweak
+      message: The AER-9 is no longer useless
+    - type: Tweak
+      message: The AER-12 now is viable T4
+    - type: Tweak
+      message: 'The AER-14 has lost DPS for potential damage '
+  id: 6180
+  time: '2026-07-03T03:54:05.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/943
