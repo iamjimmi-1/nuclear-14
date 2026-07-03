@@ -6,7 +6,7 @@
   obfuscation:
     !type:SyllableObfuscation
     minSyllables: 1
-    maxSyllables: 8
+    maxSyllables: 3
     replacement:
     - woof
     - bark

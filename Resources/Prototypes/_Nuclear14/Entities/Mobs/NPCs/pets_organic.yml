@@ -1,7 +1,7 @@
 - type: entity
   name: Basic Pet
   id: N14MobPetBasic
-  parent: N14MobBaseHostile
+  parent: N14MobBaseHostileNoAccent
   categories: [ HideSpawnMenu ]
   description: Why are you even reading this?
   components:
@@ -123,8 +123,6 @@
     interactSuccessSpawn: EffectHearts
     interactSuccessSound:
       collection: N14DogBark #Misfits Change
-  - type: ReplacementAccent
-    accent: BarkAccent
   - type: LanguageKnowledge
     speaks:
     - N14Dog
@@ -132,6 +130,7 @@
     - N14Dog
     - N14Insect
     - English
+    - Spanish
     - Chinese
     - Latin
     - Tribal
