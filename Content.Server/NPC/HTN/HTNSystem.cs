@@ -34,12 +34,10 @@ public sealed partial class HTNSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly NPCSystem _npc = default!;
     [Dependency] private readonly NPCUtilitySystem _utility = default!;
-    // Corvax
     [Dependency] private readonly WorldControllerSystem _world = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     private EntityQuery<WorldControllerComponent> _mapQuery;
     private EntityQuery<LoadedChunkComponent> _loadedQuery;
-    // Corvax
 
     private readonly JobQueue _planQueue = new(0.004);
 
@@ -178,8 +176,8 @@ public sealed partial class HTNSystem : EntitySystem
 
 
     /// <summary>
-    /// Starts all planning, handling only new completed plans on active NPCs
-    /// decides if new plans should replace old plan of an NPC
+    /// Starts all planning, handling only newly completed plans on active NPCs
+    /// decides if new plans should replace current executing NPC plan
     /// Called by NPCsystem every tick
     /// </summary>
     /// <param name="count"> number of NPCs updated so far </param>
@@ -207,9 +205,12 @@ public sealed partial class HTNSystem : EntitySystem
             if (count >= maxUpdates)
                 break;
 
+            // Misfit change: Redundant check. Query will only get ents with ActiveNPCComp AND HTNComp
+            /*
             if (!IsNPCActive(uid))  // Corvax
                 continue;
-
+            */
+            // Misfit End
             if (comp.PlanningJob != null)
             {
                 if (comp.PlanningJob.Exception != null)

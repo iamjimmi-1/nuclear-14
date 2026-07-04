@@ -232,7 +232,7 @@ namespace Content.Server.NPC.Systems
                 {
                     Text = Loc.GetString("npc-order-stop"),
                     Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/sentient.svg.192dpi.png")),
-                    Act = () => SleepNPC(args.Target)
+                    Act = () => SleepNPC(args.Target, removeSound: false)
                 };
 
                 if (IsAwake(args.Target))

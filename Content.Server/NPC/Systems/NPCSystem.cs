@@ -1,11 +1,15 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Server.NPC.Components;
 using Content.Server.NPC.HTN;
+using Content.Shared.Audio; // Misfit Add for SleepNPC and WakeNPC
 using Content.Shared.CCVar;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Components; // Misfit Add for SleepNPC and WakeNPC
 using Content.Shared.NPC;
+using Content.Shared.Sound; // Misfit Add for SleepNPC and WakeNPC
+using Content.Shared.Sound.Components;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 
@@ -26,6 +30,8 @@ namespace Content.Server.NPC.Systems
 
         [Dependency] private readonly HTNSystem _htn = default!;
         [Dependency] private readonly MobStateSystem _mobState = default!;
+        [Dependency] private readonly SharedAmbientSoundSystem _ambient = default!;
+        [Dependency] private readonly SharedEmitSoundSystem _emitSound = default!;
 
         /// <summary>
         /// Whether any NPCs are allowed to run at all.
@@ -81,10 +87,17 @@ namespace Content.Server.NPC.Systems
             WakeNPC(uid, component);
         }
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <param name="component"></param>
+        /// <param name="args"></param>
         public void OnNPCMapInit(EntityUid uid, HTNComponent component, MapInitEvent args)
         {
             component.Blackboard.SetValue(NPCBlackboard.Owner, uid);
-            WakeNPC(uid, component);
+            /// Misfit Change: <see cref="_Misfits.NPC.ProximityNPCSystem"/> would sleep almost all NPCs on init anyway
+            /// WakeNPC(uid, component);
         }
 
         public void OnNPCShutdown(EntityUid uid, HTNComponent component, ComponentShutdown args)
@@ -125,10 +138,22 @@ namespace Content.Server.NPC.Systems
             }
 
             Log.Debug($"Waking {ToPrettyString(uid)}");
-            EnsureComp<ActiveNPCComponent>(uid);
-        }
+            // Misfit add: Reduce repeated code and maintain consistency
+            //             calls to WakeNPC should always undo what SleepNPC does vice versa
 
-        public void SleepNPC(EntityUid uid, HTNComponent? component = null)
+
+            // Add InputMover BEFORE wake so steering can write to it on the first tick.
+            EnsureComp<InputMoverComponent>(uid);
+            EnsureComp<ActiveNPCComponent>(uid);
+            // re-Enable sound in-case SleepNPC disabled it
+            _emitSound.SetEnabled((uid, (SpamEmitSoundComponent?) null), true);
+            _ambient.SetAmbience(uid, true);
+
+
+            // Misfit end:
+        }
+        //
+        public void SleepNPC(EntityUid uid, HTNComponent? component = null, bool removeSound = true)
         {
             if (!Resolve(uid, ref component, false))
             {
@@ -149,6 +174,21 @@ namespace Content.Server.NPC.Systems
 
             Log.Debug($"Sleeping {ToPrettyString(uid)}");
             RemComp<ActiveNPCComponent>(uid);
+
+
+            // Misfit Change: remove sound and inputMover when sleeping NPCs
+            //                code below was repeated in ProximityNPCSystem
+            //                after SleepNPC, so just put it here for consistency
+
+            // entirely — no HandleMobMovement per physics substep while asleep.
+            RemCompDeferred<InputMoverComponent>(uid);
+            // In-cases where sleep is called for player's possesing NPCs
+            // though you may want to remove their audio for one reason or other like SPAM
+            if (!removeSound) return;
+            // Silence idle sounds while sleeping — no point emitting audio for NPCs
+            // that are 60+ tiles from any player.
+            _emitSound.SetEnabled((uid, (SpamEmitSoundComponent?) null), false);
+            _ambient.SetAmbience(uid, false);
         }
         public void OnMobStateChange(EntityUid uid, HTNComponent component, MobStateChangedEvent args)
         {
@@ -162,7 +202,7 @@ namespace Content.Server.NPC.Systems
                     break;
                 case MobState.Critical:
                 case MobState.Dead:
-                    SleepNPC(uid, component);
+                    SleepNPC(uid, component); // Mob should't be able to move or act by this point
                     break;
             }
         }
