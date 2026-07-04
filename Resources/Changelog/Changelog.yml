@@ -8505,3 +8505,10 @@ Entries:
   id: 6183
   time: '2026-07-03T18:04:07.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/957
+- author: Jerryaqua
+  changes:
+    - type: Tweak
+      message: 'made 12.7 a unique and viable SMG round! '
+  id: 6184
+  time: '2026-07-04T05:15:15.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/958
