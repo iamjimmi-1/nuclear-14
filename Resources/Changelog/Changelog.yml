@@ -8537,3 +8537,14 @@ Entries:
   id: 6187
   time: '2026-07-04T22:32:21.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/965
+- author: Bradysgaming
+  changes:
+    - type: Tweak
+      message: >-
+        Gave 80's Keys to the bikes back (you will violently loose your limbs
+        when it explodes so be carefull.)
+    - type: Tweak
+      message: bitterdrink actually needs glowpeppers not datura extract
+  id: 6188
+  time: '2026-07-05T18:14:52.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/966
