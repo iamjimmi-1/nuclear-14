@@ -270,12 +270,7 @@ public sealed class VaultDoorConsoleSystem : EntitySystem
         comp.BoltedDoors.Clear();
     }
 
-    /// <summary>
-    /// Intercepts clicks on any *other* button/switch wired to a hack-locked vault door (the
-    /// interior push-button, wall terminals, etc.) and pops up the remaining lockout time at the
-    /// button the player actually clicked, instead of leaving them to click a dead button with no
-    /// feedback (the door itself would otherwise just silently refuse via DoorBoltComponent).
-    /// </summary>
+    /// Intercepts clicks on any *other* button/switch wired to a hack-locked vault door
     private void OnVaultButtonActivate(EntityUid uid, AutoLinkTransmitterComponent transmitter, ActivateInWorldEvent args)
     {
         if (args.Handled || !args.Complex)
