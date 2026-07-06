@@ -237,11 +237,14 @@ namespace Content.Client.Construction
                 {
                     if (showPopup)
                     {
-                        var message = condition.GenerateGuideEntry()?.Localization;
-                        if (message != null)
+                        var guideEntry = condition.GenerateGuideEntry();
+                        if (guideEntry?.Localization != null)
                         {
                             // Show the reason to the user:
-                            _popupSystem.PopupCoordinates(Loc.GetString(message), loc);
+                            var message = guideEntry.Arguments != null
+                                ? Loc.GetString(guideEntry.Localization, guideEntry.Arguments)
+                                : Loc.GetString(guideEntry.Localization);
+                            _popupSystem.PopupCoordinates(message, loc);
                         }
                     }
 
