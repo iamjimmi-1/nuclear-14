@@ -278,6 +278,39 @@
   - type: Wires
     layoutId: HighSec
 
+- type: entity
+  parent: N14DoorAirlockSlanted
+  id: N14DoorAirlockSlantedVaultCargo
+  suffix: Vault Cargo Specialist, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsVaultCargo ]
+  - type: Wires
+    layoutId: HighSec
+
+- type: entity
+  parent: N14DoorAirlockSlanted
+  id: N14DoorAirlockSlantedVaultCourier
+  suffix: Vault Courier, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsVaultCourier ]
+  - type: Wires
+    layoutId: HighSec
+
+- type: entity
+  parent: N14DoorAirlockSlanted
+  id: N14DoorAirlockSlantedVaultSalvage
+  suffix: Vault Salvage Specialist, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsVaultSalvage ]
+  - type: Wires
+    layoutId: HighSec
+
 #MARK: Keylocked
 
 #IronKey

@@ -75,6 +75,30 @@
   - type: PresetIdCard
     job: Overseer
 
+- type: entity
+  parent: N14IDCardVault
+  id: N14IDCardVaultCargo
+  name: vault cargo specialist ID card
+  components:
+  - type: PresetIdCard
+    job: VaultCargoSpecialist
+
+- type: entity
+  parent: N14IDCardVault
+  id: N14IDCardVaultCourier
+  name: vault courier ID card
+  components:
+  - type: PresetIdCard
+    job: VaultCourier
+
+- type: entity
+  parent: N14IDCardVault
+  id: N14IDCardVaultSalvage
+  name: vault salvage specialist ID card
+  components:
+  - type: PresetIdCard
+    job: VaultSalvageSpecialist
+
 #MARK: Passports
 - type: entity
   parent: N14IDCard

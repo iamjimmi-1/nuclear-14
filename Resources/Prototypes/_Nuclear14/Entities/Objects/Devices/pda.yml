@@ -146,6 +146,30 @@
 
 - type: entity
   parent: N14BasePipboy
+  id: N14VaultCargoPDA
+  suffix: Vault, Cargo Specialist
+  components:
+  - type: Pda
+    id: N14IDCardVaultCargo
+
+- type: entity
+  parent: N14BasePipboy
+  id: N14VaultCourierPDA
+  suffix: Vault, Courier
+  components:
+  - type: Pda
+    id: N14IDCardVaultCourier
+
+- type: entity
+  parent: N14BasePipboy
+  id: N14VaultSalvagePDA
+  suffix: Vault, Salvage Specialist
+  components:
+  - type: Pda
+    id: N14IDCardVaultSalvage
+
+- type: entity
+  parent: N14BasePipboy
   id: N14VaultChefPDA
   description: Covered in grease and flour.
   suffix: Vault, Chef
