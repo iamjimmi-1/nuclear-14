@@ -12,6 +12,14 @@
       "directions": 4
     },
     {
+      "name": "off",
+      "directions": 4
+    },
+    {
+      "name": "on",
+      "directions": 4
+    },
+    {
       "name": "walking",
       "directions": 4,
       "delays": [
