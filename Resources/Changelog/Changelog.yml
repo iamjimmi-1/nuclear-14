@@ -8583,3 +8583,104 @@ Entries:
   id: 6191
   time: '2026-07-06T16:41:15.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/936
+- author: Vixting
+  changes:
+    - type: Remove
+      message: removed duplicate nitrogen from reduced chem master
+  id: 6192
+  time: '2026-07-07T03:44:43.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/975
+- author: silasadam
+  changes:
+    - type: Tweak
+      message: Protectron RCDs now have wasteland structures/tiles
+    - type: Tweak
+      message: >-
+        Assaultrons have been buffed and fixed. Their beam/tesla is now an
+        ability, they deal 25 pierce and 25 slash unarmed, can no longer wield
+        weapons, can now wideswing properly, and have the same infinite cell as
+        their brethren, they also have 10% reflect chance on small and medium
+        calibers. Go forth my children. Kill.
+    - type: Tweak
+      message: Z.A.X Cores understand and speak all languages.
+    - type: Tweak
+      message: >-
+        All silicons no longer need headsets and instead utilize inbuilt radios.
+        Keys can be removed from them if dead or crit. And they can insert keys
+        themselves.
+    - type: Fix
+      message: You can no longer remove a silicons cell unless you are that silicon.
+  id: 6193
+  time: '2026-07-07T04:24:31.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/977
+- author: Operator
+  changes:
+    - type: Add
+      message: aitakeover command
+    - type: Tweak
+      message: ZAX Units get wasteland&binary keys on spawn
+    - type: Tweak
+      message: ZAX NPC units properly function as ghostroles
+    - type: Tweak
+      message: >-
+        ZAX Units inherit SPECIAL properly, and if they dont, they get 5/5/5/5/5
+        across the board
+    - type: Fix
+      message: Securitron front-facing error sprite. [Again.]
+  id: 6194
+  time: '2026-07-08T02:20:36.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/983
+- author: cythisiax
+  changes:
+    - type: Tweak
+      message: Nerf fireStacks.
+  id: 6195
+  time: '2026-07-08T03:21:45.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/985
+- author: Operator
+  changes:
+    - type: Add
+      message: >-
+        Added Z.A.X Chassis to lobby selection. You cant spawn in as them, but
+        admins can spawn you in now.
+    - type: Fix
+      message: Fixed securitron sprite attributions.
+  id: 6196
+  time: '2026-07-08T03:22:24.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/984
+- author: Operator
+  changes:
+    - type: Add
+      message: Brace Repair Mode [Z.A.X C-27s]
+    - type: Tweak
+      message: Z.A.X Unit/Core descriptions
+    - type: Add
+      message: Z.A.X Core integrated wendover map
+    - type: Add
+      message: Z.A.X Core Linked Unit list/Warp ability
+  id: 6197
+  time: '2026-07-08T15:52:21.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/986
+- author: JohnKieser
+  changes:
+    - type: Fix
+      message: Crit NPCs don't move anymore. Shouldn't affect players possessing pets
+  id: 6198
+  time: '2026-07-08T20:54:24.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/961
+- author: RedBookcase
+  changes:
+    - type: Add
+      message: >-
+        Fireman Carry is now a 2 Point perk anyone can take. Followers get it by
+        default.
+  id: 6199
+  time: '2026-07-08T21:01:22.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/974
+- author: Dpellowski
+  changes:
+    - type: Add
+      message: The ability to link your discord to your SS14 account on this server.
+  id: 6200
+  time: '2026-07-09T03:58:34.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/992
