@@ -8677,3 +8677,10 @@ Entries:
   id: 6199
   time: '2026-07-08T21:01:22.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/974
+- author: Dpellowski
+  changes:
+    - type: Add
+      message: The ability to link your discord to your SS14 account on this server.
+  id: 6200
+  time: '2026-07-09T03:58:34.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/992
