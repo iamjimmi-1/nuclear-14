@@ -8759,3 +8759,10 @@ Entries:
   id: 6206
   time: '2026-07-10T22:18:07.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/1001
+- author: JohnKieser
+  changes:
+    - type: Add
+      message: Updated to RTB 279.0.1
+  id: 6207
+  time: '2026-07-10T22:40:28.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/997
