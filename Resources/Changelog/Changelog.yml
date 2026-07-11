@@ -8807,3 +8807,18 @@ Entries:
   id: 6208
   time: '2026-07-10T22:43:10.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/1002
+- author: Bradysgaming
+  changes:
+    - type: Add
+      message: Added the Plasma Cutter, New anti PA weapon to HP kit
+    - type: Remove
+      message: 'Removed Slippery mutation '
+    - type: Tweak
+      message: Made the Ripper sword 80's only
+    - type: Tweak
+      message: >-
+        Nerfed Aer-12 to 4 rof 25 dmg and added recoil to it so its not
+        pinpoint.
+  id: 6209
+  time: '2026-07-11T01:04:40.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/1003
