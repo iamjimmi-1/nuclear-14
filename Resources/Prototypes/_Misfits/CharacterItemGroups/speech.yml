@@ -37,3 +37,5 @@
       id: N14OldTimerAccent
     - type: trait
       id: N14MisterHandyAccent
+    - type: trait
+      id: N14GermanAccent

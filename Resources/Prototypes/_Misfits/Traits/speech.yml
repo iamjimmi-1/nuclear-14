@@ -192,3 +192,15 @@
   - !type:TraitAddComponent
     components:
     - type: MisterHandyAccent
+
+- type: trait
+  id: N14GermanAccent
+  category: Speech
+  points: 1
+  requirements:
+  - !type:CharacterItemGroupRequirement
+    group: N14SpeechAccents
+  functions:
+  - !type:TraitAddComponent
+    components:
+    - type: GermanAccent

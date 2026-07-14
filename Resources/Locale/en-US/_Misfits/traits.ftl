@@ -167,3 +167,7 @@ trait-description-N14OldTimerAccent =
 trait-name-N14MisterHandyAccent = Mister Handy Etiquette
 trait-description-N14MisterHandyAccent =
     Your etiquette protocols survived the apocalypse fully intact. Ever so polite, impeccably British, and always ready with a spot of tea, mum.
+
+trait-name-N14GermanAccent = German Accent
+trait-description-N14GermanAccent =
+    Ze old country lives on in your family, ja? Somehow zey kept ze accent alive for two hundred years after ze bombs fell.
