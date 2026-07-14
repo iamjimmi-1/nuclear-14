@@ -8969,3 +8969,10 @@ Entries:
   id: 6222
   time: '2026-07-14T20:16:48.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/1022
+- author: Bradysgaming
+  changes:
+    - type: Fix
+      message: Fixed Every t-45 having bos tacmap
+  id: 6223
+  time: '2026-07-14T20:25:26.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/1023
