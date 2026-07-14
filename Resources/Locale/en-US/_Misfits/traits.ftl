@@ -143,3 +143,23 @@ trait-description-N14RussianAccent =
 trait-name-N14ItalianAccent = Italian Accent
 trait-description-N14ItalianAccent =
     Mamma mia! Somewhere between the old country and the wasteland, your family never lost the flavor.
+
+trait-name-N14VaultDwellerAccent = Vault Dweller Vernacular
+trait-description-N14VaultDwellerAccent =
+    Gosh, golly, gee whiz! Two hundred years of sheltered vault life kept your vocabulary as squeaky clean as a Vault-Tec brochure.
+
+trait-name-N14RadioAnnouncerAccent = Radio Announcer
+trait-description-N14RadioAnnouncerAccent =
+    You've got a voice made for radio, and you know it. Every sentence sounds like it's going out live to the whole wasteland, folks.
+
+trait-name-N14LegionLatinAccent = Legion Latin
+trait-description-N14LegionLatinAccent =
+    True to Caesar! Your speech is peppered with the Legion's classical Latin. Ave, amice.
+
+trait-name-N14GhoulRaspAccent = Ghoul Rasp
+trait-description-N14GhoulRaspAccent =
+    Two centuries of radiation did your vocal cords no favors, smoothskin. Speech comes out rasping, hissing and wheezing.
+
+trait-name-N14OldTimerAccent = Old-Timer
+trait-description-N14OldTimerAccent =
+    Consarn it, you've been wanderin' this wasteland since before these whippersnappers were born, and you talk like it.
