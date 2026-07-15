@@ -21,8 +21,9 @@
       id: N14SouthernAccent
     - type: trait
       id: N14MobsterAccent
-    - type: trait
-      id: N14RussianAccent
+    # Misfits - Russian accent disabled for now, uncomment here and in Traits/speech.yml to re-enable.
+    #- type: trait
+    #  id: N14RussianAccent
     - type: trait
       id: N14ItalianAccent
     - type: trait

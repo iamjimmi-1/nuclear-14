@@ -81,17 +81,18 @@
     - type: MobsterAccent
       isBoss: false
 
-- type: trait
-  id: N14RussianAccent
-  category: Speech
-  points: 1
-  requirements:
-  - !type:CharacterItemGroupRequirement
-    group: N14SpeechAccents
-  functions:
-  - !type:TraitAddComponent
-    components:
-    - type: RussianAccent
+# Misfits - disabled for now, uncomment here and in CharacterItemGroups/speech.yml to re-enable.
+#- type: trait
+#  id: N14RussianAccent
+#  category: Speech
+#  points: 1
+#  requirements:
+#  - !type:CharacterItemGroupRequirement
+#    group: N14SpeechAccents
+#  functions:
+#  - !type:TraitAddComponent
+#    components:
+#    - type: RussianAccent
 
 - type: trait
   id: N14ItalianAccent
