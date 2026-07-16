@@ -8985,3 +8985,12 @@ Entries:
   id: 6224
   time: '2026-07-14T22:41:18.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/1024
+- author: John-Dang
+  changes:
+    - type: Add
+      message: >-
+        Added new descriptions for the shopkeeper quests and a few items, like
+        space cola now being generic cola!
+  id: 6225
+  time: '2026-07-16T22:09:57.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/1033
