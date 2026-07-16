@@ -882,7 +882,7 @@
 - type: storeContract
   id: caravan_contract_N14MobDeathclawGrandHunt
   name: "The Bottom Line"
-  description: "Deathclaws have attacked caravans through the Wendover Valley, leading to signficant losses of trusted caravaneers. The caravan network is offering a generous reward for those who will thin our their nests."
+  description: "Deathclaws have attacked caravans through the Wendover Valley, leading to signficant losses of trusted caravaneers. The caravan network is offering a generous reward for those who will thin out their nests."
   difficulty: Diamond
   targets:
   - id: N14MobDeathclaw
