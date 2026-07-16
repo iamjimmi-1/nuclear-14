@@ -56,8 +56,8 @@
   - type: ExplosionResistance
     damageCoefficient: 0.85
   - type: ClothingSpeedModifier
-    walkModifier: 0.95 # Forge-Change
-    sprintModifier: 0.95 # Forge-Change
+    walkModifier: 1.0 # Forge-Change
+    sprintModifier: 1.0 # Forge-Change
 
 - type: entity
   parent: [N14FalloutArmorBase, N14ClothingOuterBase]
@@ -797,8 +797,8 @@
   - type: Clothing
     sprite: _Nuclear14/Clothing/OuterClothing/Armor/falloutNCRvestcoatblack.rsi
   - type: ClothingSpeedModifier
-    walkModifier: 1.10
-    sprintModifier: 1.10
+    walkModifier: 1.05
+    sprintModifier: 1.05
   - type: Armor
     modifiers:
       coefficients:
@@ -1513,8 +1513,8 @@
   - type: ExplosionResistance
     damageCoefficient: 0.8
   - type: ClothingSpeedModifier # Forge-Change
-    walkModifier: 1.1 # consistency and yes I know we don't have bluprints of these
-    sprintModifier: 1.1
+    walkModifier: 1.05 # consistency and yes I know we don't have bluprints of these
+    sprintModifier: 1.05
 
 # New Midwest BoS stuff after rework
 
@@ -1951,5 +1951,5 @@
         Piercing: 0.775
         Heat: 0.825
   - type: ClothingSpeedModifier
-    walkModifier: 0.975
-    sprintModifier: 0.975
+    walkModifier: 1.0
+    sprintModifier: 1.0
