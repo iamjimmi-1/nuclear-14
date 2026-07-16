@@ -8994,3 +8994,14 @@ Entries:
   id: 6225
   time: '2026-07-16T22:09:57.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/1033
+- author: Jerryaqua
+  changes:
+    - type: Add
+      message: Unique Town blueprints!
+    - type: Tweak
+      message: Fixed prices of town blueprints
+    - type: Tweak
+      message: Made the Douglas an advanced SMG, same stats as the other two
+  id: 6226
+  time: '2026-07-16T22:18:14.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/1019
