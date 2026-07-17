@@ -9016,3 +9016,14 @@ Entries:
   id: 6227
   time: '2026-07-16T22:30:30.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/1030
+- author: Vixting
+  changes:
+    - type: Add
+      message: Added vault cargo specialist, salvage specialist, courier job roles
+    - type: Tweak
+      message: Vault is now a minor
+    - type: Tweak
+      message: 'Vault cargo console is now locked to overseer / cargo access '
+  id: 6228
+  time: '2026-07-17T13:41:06.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/981
