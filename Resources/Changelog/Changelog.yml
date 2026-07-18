@@ -9057,3 +9057,10 @@ Entries:
   id: 6231
   time: '2026-07-18T14:23:03.0000000+00:00'
   url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/1035
+- author: Squagg
+  changes:
+    - type: Add
+      message: Added the oversized doctor's beret, worn by the FOTA supermutant doctor.
+  id: 6232
+  time: '2026-07-18T14:26:10.0000000+00:00'
+  url: https://github.com/Misfit-Sanctuary/nuclear-14/pull/1040
